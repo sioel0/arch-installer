@@ -1,4 +1,4 @@
-- name: Arch Linux Installation script, Arch+Gnome
+- name: Arch Linux Installation script, Arch+i3
   connection: local
   hosts: localhost
   tasks:
@@ -12,13 +12,15 @@
           - cowsay
           - neofetch
           # wm
+          - i3-gaps
+          - i3status
+          - i3lock
+          - dmenu
           - nitrogen
           - xorg
           - xorg-server
           - xorg-xmodmap
           - xorg-xrdb
-          - gnome-tweaks
-          - gnome-shell-extensions
           # system configuration
           - light
           - pavucontrol
@@ -86,7 +88,6 @@
         name:
           - ly
           - pwninit
-          - laptop-mode-tools
           - one_gadget
           - chrome-gnome-shell
         state: present
@@ -96,7 +97,6 @@
       service:
         name:
           - bumblebeed
-          - laptop-mode
           - docker
           - tailscaled
           - libvirtd

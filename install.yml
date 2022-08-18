@@ -1,8 +1,9 @@
-- name: Arch Linux Installation script
+- name: Arch Linux Installation script, Arch+Dwm
   connection: local
   hosts: localhost
   tasks:
     - name: Install packages
+      become: True
       pacman:
         name:
           # aestethic
@@ -11,15 +12,11 @@
           - cowsay
           - neofetch
           # wm
-          - i3-gaps
-          - i3status
-          - i3lock
           - nitrogen
           - xorg
           - xorg-server
           - xorg-xmodmap
           - xorg-xrdb
-          - dmenu
           # system configuration
           - light
           - pavucontrol
@@ -64,8 +61,6 @@
           - firefox
           - chromium
           - thunderbird
-          # terminal
-          - xterm
         state: present
             
     - name: Clone paru AUR helper
@@ -94,6 +89,7 @@
         state: present
           
     - name: Enable services
+      become: True
       service:
         name:
           - bumblebeed
@@ -124,3 +120,37 @@
           - pwntools
           - z3-solver
 
+    - name: Download jetbrains toolbox app
+      get_url:
+        url: https://www.jetbrains.com/toolbox-app/download/download-thanks.html?platform=linux
+        dest: ~/Downloads/jetbrains-toolbox.tar.gz
+
+    - name: Extract and install toolbox
+      become: True
+      shell:
+        cmd: sudo tar -xzf ~/Downloads/jetbrains-toolbox.tar.gz -C /opt && /opt/jetbrains-toolbox/jetbrains-toolbox
+
+    - name: Get dotfiles
+      git:
+        repo: git@github.com:sioel0/dotfiles
+        dest: ~/Projects/dotfiles
+        clone: yes
+        update: yes
+
+    - name: Install dotfiles
+      shell:
+        cmd: ~/Projects/dotfiles/install.shell
+
+    - name: Install packer, neovim's plugin manager
+      git:
+        repo: https://github.com/wbthomason/packer.neovim
+        dest: ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+        clone: yes
+        update: yes
+
+    - name: Add neovim configuration
+      git:
+        repo: git@github.com:sioel0/slnvim
+        dest: ~/.config/nvim
+        clone: yes
+        update: yes

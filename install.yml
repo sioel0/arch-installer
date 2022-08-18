@@ -1,4 +1,4 @@
-- name: Arch Linux Installation script, Arch+Dwm
+- name: Arch Linux Installation script, Arch+Gnome
   connection: local
   hosts: localhost
   tasks:
@@ -12,16 +12,13 @@
           - cowsay
           - neofetch
           # wm
-          - i3-gaps
-          - i3status
-          - i3lock
-          - xterm
-          - dmenu
           - nitrogen
           - xorg
           - xorg-server
           - xorg-xmodmap
           - xorg-xrdb
+          - gnome-tweaks
+          - gnome-shell-extensions
           # system configuration
           - light
           - pavucontrol
@@ -91,6 +88,7 @@
           - pwninit
           - laptop-mode-tools
           - one_gadget
+          - chrome-gnome-shell
         state: present
           
     - name: Enable services

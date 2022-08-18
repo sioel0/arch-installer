@@ -1,0 +1,126 @@
+- name: Arch Linux Installation script
+  connection: local
+  hosts: localhost
+  tasks:
+    - name: Install packages
+      pacman:
+        name:
+          # aestethic
+          - lolcat
+          - figlet
+          - cowsay
+          - neofetch
+          # wm
+          - i3-gaps
+          - i3status
+          - i3lock
+          - nitrogen
+          - xorg
+          - xorg-server
+          - xorg-xmodmap
+          - xorg-xrdb
+          - dmenu
+          # system configuration
+          - light
+          - pavucontrol
+          - libinput
+          - bumblebee
+          # utilities
+          - htop
+          - tmux
+          - bat
+          - stow
+          - zoxide
+          - nmap
+          - ripgrep
+          - wireshark-cli
+          - wireshark-qt
+          # development
+          - git
+          - jdk17-openjdk
+          - base-devel
+          - texlive-most
+          - texstudio
+          - neovim
+          - rustup
+          # virtualization
+          - docker
+          - virt-manager
+          - qemu-desktop
+          - libvirt
+          - edk2-ovmf
+          - dnsmasq
+          - iptables-nft
+          # binary exp tools
+          - ghidra
+          - radare2
+          - r2ghidra
+          - pwndbg
+          # vpn
+          - tailscale
+          # desktop apps
+          - telegram-desktop
+          - libreoffice
+          - firefox
+          - chromium
+          - thunderbird
+          # terminal
+          - xterm
+        state: present
+            
+    - name: Clone paru AUR helper
+      git:
+        repo: https://aur.archlinux.org/paru
+        dest: /tmp
+        clone: yes
+        update: yes
+
+    - name: Install rustup toolchain
+      shell:
+        cmd: rustup toolchain install stable
+
+    - name: Install paru
+      shell:
+        cmd: cd /tmp/paru && makepkg -si
+
+    - name: Install aur packages
+      pacman:
+        executable: paru
+        name:
+          - ly
+          - pwninit
+          - laptop-mode-tools
+          - one_gadget
+        state: present
+          
+    - name: Enable services
+      service:
+        name:
+          - bumblebeed
+          - laptop-mode
+          - docker
+          - tailscaled
+          - libvirtd
+          - ly
+        enabled: yes
+
+    - name: Create projects and tools directories
+      file:
+        path: 
+          - ~/Projects
+          - ~/tools
+        state: directory
+
+    - name: Clone ghidra-dark
+      git:
+        repo: https://github.com/zackelia/ghidra-dark
+        dest: ~/tools/ghidra-dark
+        clone: yes
+        update: yes
+
+    - name: Installing pwntools and z3-solver
+      pip:
+        name:
+          - pwntools
+          - z3-solver
+

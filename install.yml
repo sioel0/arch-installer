@@ -28,6 +28,7 @@
           - xorg-server
           - xorg-xmodmap
           - xorg-xrdb
+          - dunst
           # system configuration
           - light
           - pavucontrol

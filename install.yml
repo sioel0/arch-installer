@@ -2,6 +2,13 @@
   connection: local
   hosts: localhost
   tasks:
+
+    - name: Setup pacman
+      become: True
+      copy:
+        src: dots/sys/pacman.conf
+        dest: /etc/pacman.conf
+
     - name: Install packages
       become: True
       pacman:
@@ -15,7 +22,7 @@
           - i3-gaps
           - i3status
           - i3lock
-          - dmenu
+          - rofi
           - nitrogen
           - xorg
           - xorg-server
@@ -36,6 +43,8 @@
           - ripgrep
           - wireshark-cli
           - wireshark-qt
+          - fuse
+          - polkit
           # development
           - git
           - jdk17-openjdk
@@ -65,49 +74,22 @@
           - firefox
           - chromium
           - thunderbird
+          # terminal
+          - xterm
         state: present
-            
-    - name: Clone paru AUR helper
-      git:
-        repo: https://aur.archlinux.org/paru
-        dest: /tmp
-        clone: yes
-        update: yes
 
-    - name: Install rustup toolchain
-      shell:
-        cmd: rustup toolchain install stable
-
-    - name: Install paru
-      shell:
-        cmd: cd /tmp/paru && makepkg -si
-
-    - name: Install aur packages
-      pacman:
-        executable: paru
-        name:
-          - ly
-          - pwninit
-          - one_gadget
-          - chrome-gnome-shell
-        state: present
-          
     - name: Enable services
-      become: True
-      service:
-        name:
-          - bumblebeed
-          - docker
-          - tailscaled
-          - libvirtd
-          - ly
-        enabled: yes
-
-    - name: Create projects and tools directories
+      shell:
+        cmd: sudo systemctl enable bumblebeed laptop-mode tailscaled ly libvirtd docker
+    
+    - name: Create basic directories structure
       file:
         path: 
           - ~/Projects
           - ~/tools
+          - ~/Downloads
+          - ~/Documents
+          - ~/Pictures
         state: directory
 
     - name: Clone ghidra-dark
@@ -123,30 +105,19 @@
           - pwntools
           - z3-solver
 
-    - name: Download jetbrains toolbox app
-      get_url:
-        url: https://www.jetbrains.com/toolbox-app/download/download-thanks.html?platform=linux
-        dest: ~/Downloads/jetbrains-toolbox.tar.gz
+    - name: Setup dotfiles
+      shell:
+        cmd: dots/install.sh
 
-    - name: Extract and install toolbox
+    - name: Setup libinput
       become: True
-      shell:
-        cmd: sudo tar -xzf ~/Downloads/jetbrains-toolbox.tar.gz -C /opt && /opt/jetbrains-toolbox/jetbrains-toolbox
-
-    - name: Get dotfiles
-      git:
-        repo: git@github.com:sioel0/dotfiles
-        dest: ~/Projects/dotfiles
-        clone: yes
-        update: yes
-
-    - name: Install dotfiles
-      shell:
-        cmd: ~/Projects/dotfiles/install.shell
+      copy:
+        src: dots/sys/30-touchpad.conf
+        dest: /etc/X11/xorg.conf.d/30-touchpad.conf
 
     - name: Install packer, neovim's plugin manager
       git:
-        repo: https://github.com/wbthomason/packer.neovim
+        repo: https://github.com/wbthomason/packer.nvim
         dest: ~/.local/share/nvim/site/pack/packer/start/packer.nvim
         clone: yes
         update: yes

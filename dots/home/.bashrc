@@ -5,6 +5,7 @@ export PAGER="less"
 export PROJECTS="~/gits"
 export PATH="$PATH:/home/sioel0/.bin:/home/sioel0/.local/bin:/home/sioel0/.scripts"
 export TERM="screen-256color"
+export ANSIBLE_NOCOWS=1
 # aliases
 alias cat='bat'
 alias gdb='gdb -q'

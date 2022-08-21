@@ -100,7 +100,7 @@ client.background       nord00
 
     # Switch to workspace
     bindsym $mod+f workspace $ws1
-    bindsym $mod+s workspace $ws2
+    bindsym $mod+w workspace $ws2
     bindsym $mod+a workspace $ws3
     bindsym $mod+n workspace $ws4
     bindsym $mod+u workspace $ws5
@@ -108,7 +108,7 @@ client.background       nord00
 
     # Move focused container to workspace
     bindsym $mod+Shift+f move container to workspace $ws1
-    bindsym $mod+Shift+s move container to workspace $ws2
+    bindsym $mod+Shift+w move container to workspace $ws2
     bindsym $mod+Shift+a move container to workspace $ws3
     bindsym $mod+Shift+n move container to workspace $ws4
     bindsym $mod+Shift+u move container to workspace $ws5
@@ -119,6 +119,7 @@ client.background       nord00
     assign [class="telegram-desktop"] $ws3
     assign [class="Chromium"] $ws3
     assign [class="ghidra-Ghidra"] $ws4
+    assign [class="jetbrains-idea-ce"] $ws4
     assign [class="Thunderbird"] $ws5
 
 #
@@ -158,6 +159,12 @@ client.background       nord00
     bindsym XF86KbdBrightnessDown exec sudo light -s sysfs/leds/smc::kbd\baacklight -U 5
 
 #
+# Scratchpad
+#
+bindsym $mod+slash exec scratchpad
+for_window [class="scratchpad"] move scratchpad
+
+#
 # Resizing containers:
 #
 mode "resize" {
@@ -183,8 +190,6 @@ bindsym $mod+Shift+t exec telegram-desktop
 
 bindsym $mod+g exec ghidra
 
-bindsym $mod+w exec firefox
-
 bindsym $mod+c exec chromium
 
 bindsym $mod+z exec zathura
@@ -196,7 +201,7 @@ bar {
     status_command i3status
     position bottom
     tray_output primary
-    font pango:Fira Code Retina 10
+    font pango:Fira Code Retina 9
     separator_symbol ":|:"
     workspace_buttons yes
 }

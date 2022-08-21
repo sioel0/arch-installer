@@ -186,3 +186,7 @@
       shell:
         cmd: dots/install.sh
 
+    - name: Set zsh as default user shell
+      user:
+        name: "{{ansible_user_id}}"
+        shell: /usr/bin/zsh

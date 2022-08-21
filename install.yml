@@ -45,6 +45,7 @@
           - wireshark-cli
           - wireshark-qt
           - fuse
+          - lxappearance
           - polkit
           # development
           - git
@@ -149,3 +150,10 @@
         name: user.email
         scope: global
         value: "{{email}}"
+
+    - name: Install tmux plugin manager tpm
+      git:
+        repo: https://github.com/tmux-plugins/tpm
+        dest: ~/.tmux/plugins/tpm
+        clone: yes
+        update: yes

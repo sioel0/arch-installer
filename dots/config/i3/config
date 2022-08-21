@@ -96,7 +96,7 @@ client.background       $nord00
     set $ws3 
     set $ws4 
     set $ws5 
-    set $ws6 
+    set $ws6 
 
     # Switch to workspace
     bindsym $mod+f workspace $ws1
@@ -104,7 +104,7 @@ client.background       $nord00
     bindsym $mod+a workspace $ws3
     bindsym $mod+n workspace $ws4
     bindsym $mod+e workspace $ws5
-    bindsym $mod+i workspace $ws6
+    bindsym $mod+v workspace $ws6
 
     # Move focused container to workspace
     bindsym $mod+Shift+f move container to workspace $ws1
@@ -112,7 +112,7 @@ client.background       $nord00
     bindsym $mod+Shift+a move container to workspace $ws3
     bindsym $mod+Shift+n move container to workspace $ws4
     bindsym $mod+Shift+e move container to workspace $ws5
-    bindsym $mod+Shift+i move container to workspace $ws6
+    bindsym $mod+Shift+v move container to workspace $ws6
 
     assign [class="XTerm"] $ws1
     assign [class="firefox"] $ws2
@@ -121,6 +121,7 @@ client.background       $nord00
     assign [class="ghidra-Ghidra"] $ws4
     assign [class="jetbrains-idea-ce"] $ws4
     assign [class="Thunderbird"] $ws5
+    assign [class="Virt-manager"] $ws6
 
 #
 # Layout stuff:

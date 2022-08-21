@@ -75,6 +75,8 @@
           - firefox
           - chromium
           - thunderbird
+          - zathura
+          - zathura-pdf-mupdf
           # terminal
           - xterm
         state: present

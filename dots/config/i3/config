@@ -219,4 +219,6 @@ exec_always setxkbmap us -variant altgr-intl
 
 exec_always sleep 2;xmodmap ~/.Xmodmap
 
-exec_always ~/.scripts/screen
+exec_always screen_setup
+
+exec lxpolkit

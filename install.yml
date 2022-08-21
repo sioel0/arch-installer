@@ -48,6 +48,7 @@
           - fuse
           - lxappearance
           - polkit
+          - lxsession
           # development
           - git
           - jdk17-openjdk

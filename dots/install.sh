@@ -1,5 +1,6 @@
 #!/bin/bash
 
+rm ~/.bashrc ~/.zshrc
 # setup home directory files
 stow --dir=dots/ --target=/home/$USER home
 

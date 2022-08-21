@@ -83,6 +83,9 @@
           # terminal
           - xterm
           - zsh
+          # fonts
+          - ttf-fira-code
+          - ttf-font-awesome
         state: present
 
     - name: Enable services
@@ -93,19 +96,15 @@
       file:
         path: 
           - ~/Projects
-          - ~/tools
           - ~/Downloads
           - ~/Documents
           - ~/Pictures
         state: directory
 
-    - name: Clone ghidra-dark
-      git:
-        repo: https://github.com/zackelia/ghidra-dark
-        dest: ~/tools/ghidra-dark
-        clone: yes
-        update: yes
-
+    - name: Make zathura the default pdfviewer
+      shell:
+        cmd: xdg-mime default org.pwmt.zathura.desktop application/pdf
+          
     - name: Installing pwntools and z3-solver
       pip:
         name:

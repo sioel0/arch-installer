@@ -29,6 +29,7 @@
           - xorg-xmodmap
           - xorg-xrdb
           - dunst
+          - picom
           # system configuration
           - light
           - pavucontrol

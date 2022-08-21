@@ -42,13 +42,13 @@ set $nord14 #A3BE8C
 set $nord15 #B48EAD
 
 # class                 border  bground text   indicator child_border
-client.focused          nord08  nord08  nord05 nord08    nord08
-client.focused_inactive nord10  nord10  nord05 nord10    nord10
-client.unfocused        nord00  nord00  nord04 nord00    nord00
-client.urgent           nord04  nord11  nord06 nord11    nord11
-client.placeholder      nord00  nord00  nord05 nord00    nord00
+client.focused          $nord08  $nord08  $nord05 $nord08    $nord08
+client.focused_inactive $nord10  $nord10  $nord05 $nord10    $nord10
+client.unfocused        $nord00  $nord00  $nord04 $nord00    $nord00
+client.urgent           $nord04  $nord11  $nord06 $nord11    $nord11
+client.placeholder      $nord00  $nord00  $nord05 $nord00    $nord00
 
-client.background       nord00
+client.background       $nord00
 
 ### Key bindings
 #
@@ -58,7 +58,6 @@ client.background       nord00
     bindsym $mod+Return exec $term
 
     # Kill focused window
-    bindsym $mod+Shift+q kill
     bindsym $mod+q kill
 
     # Start your launcher
@@ -70,7 +69,7 @@ client.background       nord00
     bindsym $mod+Shift+r reload
 
     # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec i3-msg exit
+    bindsym $mod+Shift+z exec i3-msg exit
 
 #
 # Moving around:
@@ -103,7 +102,7 @@ client.background       nord00
     bindsym $mod+w workspace $ws2
     bindsym $mod+a workspace $ws3
     bindsym $mod+n workspace $ws4
-    bindsym $mod+u workspace $ws5
+    bindsym $mod+e workspace $ws5
     bindsym $mod+i workspace $ws6
 
     # Move focused container to workspace
@@ -111,12 +110,12 @@ client.background       nord00
     bindsym $mod+Shift+w move container to workspace $ws2
     bindsym $mod+Shift+a move container to workspace $ws3
     bindsym $mod+Shift+n move container to workspace $ws4
-    bindsym $mod+Shift+u move container to workspace $ws5
+    bindsym $mod+Shift+e move container to workspace $ws5
     bindsym $mod+Shift+i move container to workspace $ws6
 
     assign [class="XTerm"] $ws1
     assign [class="firefox"] $ws2
-    assign [class="telegram-desktop"] $ws3
+    assign [class="Telegram-Desktop"] $ws3
     assign [class="Chromium"] $ws3
     assign [class="ghidra-Ghidra"] $ws4
     assign [class="jetbrains-idea-ce"] $ws4
@@ -184,7 +183,7 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-bindsym $mod+Shift+x exec i3lock -i ~/Pictures/gnu.png
+bindsym $mod+Shift+x exec i3lock -i ~/Pictures/rick_and_morty_mushrooms.png
 
 bindsym $mod+Shift+t exec telegram-desktop
 
@@ -213,6 +212,8 @@ exec telegram-desktop -startintray
 exec nitrogen --restore
 
 exec autotiling
+
+exec picom -b
 
 exec_always setxkbmap us -variant altgr-intl
 

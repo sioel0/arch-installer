@@ -80,6 +80,7 @@
           - zathura-pdf-mupdf
           # terminal
           - xterm
+          - fish
         state: present
 
     - name: Enable services
@@ -108,10 +109,6 @@
         name:
           - pwntools
           - z3-solver
-
-    - name: Setup dotfiles
-      shell:
-        cmd: dots/install.sh
 
     - name: Setup libinput
       become: True
@@ -157,3 +154,12 @@
         dest: ~/.tmux/plugins/tpm
         clone: yes
         update: yes
+
+    - name: Setup dotfiles
+      shell:
+        cmd: dots/install.sh
+
+    - name: Install fisher, fish plugin manager
+      shell:
+        cmd: curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
+

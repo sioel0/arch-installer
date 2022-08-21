@@ -58,6 +58,7 @@ client.background       $nord00
     bindsym $mod+Return exec $term
 
     # Kill focused window
+    bindsym $mod+Shift+q kill
     bindsym $mod+q kill
 
     # Start your launcher
@@ -160,7 +161,7 @@ client.background       $nord00
 #
 # Scratchpad
 #
-bindsym $mod+slash exec scratchpad
+bindsym $mod+slash exec ~/.scripts/scratchpad
 for_window [class="scratchpad"] move scratchpad
 
 #
@@ -219,6 +220,6 @@ exec_always setxkbmap us -variant altgr-intl
 
 exec_always sleep 2;xmodmap ~/.Xmodmap
 
-exec_always screen_setup
+exec_always ~/.scripts/screen_setup
 
 exec lxpolkit

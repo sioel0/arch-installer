@@ -15,25 +15,47 @@ xterm*VT100.Translations: #override \
   Ctrl Shift <Key>C:     copy-selection(CLIPBOARD)   
 
 
-! TokyoNight colors for Xresources
+! ! ! TokyoNight colors for Xresources
+!
+! *background: #24283b
+! *foreground: #c0caf5
+!
+! *color0: #1D202F
+! *color1: #f7768e
+! *color2: #9ece6a
+! *color3: #e0af68
+! *color4: #7aa2f7
+! *color5: #bb9af7
+! *color6: #7dcfff
+! *color7: #a9b1d6
+!
+! *color8: #414868
+! *color9: #f7768e
+! *color10: #9ece6a
+! *color11: #e0af68
+! *color12: #7aa2f7
+! *color13: #bb9af7
+! *color14: #7dcfff
+! *color15: #c0caf5
 
-*background: #24283b
-*foreground: #c0caf5
+! PaperColor Theme
 
-*color0: #1D202F
-*color1: #f7768e
-*color2: #9ece6a
-*color3: #e0af68
-*color4: #7aa2f7
-*color5: #bb9af7
-*color6: #7dcfff
-*color7: #a9b1d6
+URxvt.foreground: #4D4D4C
+URxvt.background: #EEEEEE
 
-*color8: #414868
-*color9: #f7768e
-*color10: #9ece6a
-*color11: #e0af68
-*color12: #7aa2f7
-*color13: #bb9af7
-*color14: #7dcfff
-*color15: #c0caf5
+URxvt.color0: #EDEDED
+URxvt.color1: #D7005F
+URxvt.color2: #718C00
+URxvt.color3: #D75F00
+URxvt.color4: #4271AE
+URxvt.color5: #8959A8
+URxvt.color6: #3E999F
+URxvt.color7: #4D4D4C
+URxvt.color8: #969694
+URxvt.color9: #D7005F
+URxvt.color10: #718C00
+URxvt.color11: #D75F00
+URxvt.color12: #4271AE
+URxvt.color13: #8959A8
+URxvt.color14: #3E999F
+URxvt.color15: #F5F5F5

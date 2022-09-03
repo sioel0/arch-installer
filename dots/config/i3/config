@@ -1,14 +1,14 @@
 ### Variables
 #
 # Mod4 for Logo key. Mod1 for Alt.
-set $mod Mod4
+set $mod Mod1
 # Home row direction keys, like vim
 set $left h
 set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term xterm
+set $term alacritty
 
 set $menu rofi -show drun
 

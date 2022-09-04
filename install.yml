@@ -81,7 +81,7 @@
           - zathura
           - zathura-pdf-mupdf
           # terminal
-          - xterm
+          - alacritty
           - zsh
           # fonts
           - ttf-fira-code

@@ -114,13 +114,13 @@ client.background       $nord00
     bindsym $mod+Shift+e move container to workspace $ws5
     bindsym $mod+Shift+v move container to workspace $ws6
 
-    assign [class="XTerm"] $ws1
+    assign [class="Alacritty"] $ws1
     assign [class="firefox"] $ws2
     assign [class="Telegram-Desktop"] $ws3
     assign [class="Chromium"] $ws3
     assign [class="ghidra-Ghidra"] $ws4
     assign [class="jetbrains-idea-ce"] $ws4
-    assign [class="Thunderbird"] $ws5
+    assign [class="thunderbird"] $ws5
     assign [class="Virt-manager"] $ws6
 
 #

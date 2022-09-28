@@ -40,6 +40,11 @@ alias sctl='sudo systemctl'
 alias ssh='ssh -X'
 alias p='sudo pacman'
 alias v='nvim'
+# rpi pico env setup
+export PICO_SDK_PATH='/home/sioel0/Projects/pico/pico-sdk/'
+export PICO_EXAMPLES_PATH='/home/sioel0/Projects/pico/pico-examples/'
+export PICO_EXTRAS_PATH='/home/sioel0/Projects/pico/pico-extras/'
+export PICO_PLAYGROUND_PATH='/home/sioel0/Projects/pico/pico-playground/'
 
 # git aliases
 alias ga='git add'

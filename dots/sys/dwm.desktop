@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=DWM
-Exec=dwm
+Exec=/usr/local/bin/dwm
 Encoding=UTF-8
 Icon=dwm
 Type=XSession

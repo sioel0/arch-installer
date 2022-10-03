@@ -124,12 +124,12 @@
         clone: yes
         update: yes
 
-          #- name: Add neovim configuration
-      #git:
-        # repo: git@github.com:sioel0/slnvim
-          #dest: ~/.config/nvim
-          #clone: yes
-          #        update: yes
+    - name: Add neovim configuration
+      git:
+        repo: git@github.com:sioel0/slnvim
+        dest: ~/.config/nvim
+        clone: yes
+        update: yes
 
     - name: Set nvim as git editor
       git_config:

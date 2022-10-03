@@ -57,6 +57,7 @@
           - texlive-most
           - texstudio
           - neovim
+          - python-pynvim
           - rustup
           # rpi-pico stuff
           - cmake
@@ -123,6 +124,12 @@
       copy:
         src: dots/sys/30-touchpad.conf
         dest: /etc/X11/xorg.conf.d/30-touchpad.conf
+
+    - name: Add dwm.desktop file
+      become: True
+      copy:
+        src: dots/sys/dwm.desktop
+        dest: /usr/share/xsessions/dwm.desktop
 
     - name: Install packer, neovim's plugin manager
       git:
@@ -202,7 +209,7 @@
     - name: Create pico home dir
       file:
         path: ~/Projects/pico
-      state: directory
+        state: directory
 
     - name: Download pico-sdk
       git:

@@ -18,6 +18,7 @@
           - figlet
           - cowsay
           - neofetch
+          - sl
           # wm
           - i3-gaps
           - i3status
@@ -57,6 +58,11 @@
           - texstudio
           - neovim
           - rustup
+          # rpi-pico stuff
+          - cmake
+          - minicom
+          - arm-none-eabi-gcc
+          - arm-none-eabi-newlib
           # virtualization
           - docker
           - virt-manager
@@ -64,7 +70,6 @@
           - libvirt
           - edk2-ovmf
           - dnsmasq
-          - iptables-nft
           # binary exp tools
           - ghidra
           - radare2
@@ -72,6 +77,7 @@
           - pwndbg
           # vpn
           - tailscale
+          - openvpn
           # desktop apps
           - telegram-desktop
           - libreoffice
@@ -80,6 +86,7 @@
           - thunderbird
           - zathura
           - zathura-pdf-mupdf
+          - pcmanfm
           # terminal
           - alacritty
           - zsh
@@ -191,3 +198,36 @@
       user:
         name: "{{ansible_user_id}}"
         shell: /usr/bin/zsh
+
+    - name: Create pico home dir
+      file:
+        path: ~/Projects/pico
+      state: directory
+
+    - name: Download pico-sdk
+      git:
+        repo: https://github.com/raspberrypi/pico-sdk
+        dest: ~/Projects/pico/pico-sdk
+        clone: yes
+        update: yes
+
+    - name: Download pico-extras
+      git:
+        repo: https://github.com/raspberrypi/pico-extras
+        dest: ~/Projects/pico/pico-extras
+        clone: yes
+        update: yes
+
+    - name: Download pico-examples
+      git:
+        repo: https://github.com/raspberrypi/pico-examples
+        dest: ~/Projects/pico/pico-examples
+        clone: yes
+        update: yes
+
+    - name: Download pico-playground
+      git:
+        repo: https://github.com/raspberrypi/pico-playground
+        dest: ~/Projects/pico/pico-playground
+        clone: yes
+        update: yes

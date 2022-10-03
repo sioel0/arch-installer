@@ -91,37 +91,28 @@ client.background       $nord00
 # Workspaces:
 #
     # workspace names
-    set $ws1 
-    set $ws2 
-    set $ws3 
-    set $ws4 
-    set $ws5 
-    set $ws6 
+    set $ws1 1
+    set $ws2 2
+    set $ws3 3
+    set $ws4 4
+    set $ws5 5
+    set $ws6 6
 
     # Switch to workspace
     bindsym $mod+f workspace $ws1
-    bindsym $mod+w workspace $ws2
+    bindsym $mod+s workspace $ws2
     bindsym $mod+a workspace $ws3
-    bindsym $mod+n workspace $ws4
+    bindsym $mod+v workspace $ws4
     bindsym $mod+e workspace $ws5
-    bindsym $mod+v workspace $ws6
+    bindsym $mod+w workspace $ws6
 
     # Move focused container to workspace
     bindsym $mod+Shift+f move container to workspace $ws1
-    bindsym $mod+Shift+w move container to workspace $ws2
+    bindsym $mod+Shift+s move container to workspace $ws2
     bindsym $mod+Shift+a move container to workspace $ws3
-    bindsym $mod+Shift+n move container to workspace $ws4
+    bindsym $mod+Shift+v move container to workspace $ws4
     bindsym $mod+Shift+e move container to workspace $ws5
-    bindsym $mod+Shift+v move container to workspace $ws6
-
-    assign [class="Alacritty"] $ws1
-    assign [class="firefox"] $ws2
-    assign [class="Telegram-Desktop"] $ws3
-    assign [class="Chromium"] $ws3
-    assign [class="ghidra-Ghidra"] $ws4
-    assign [class="jetbrains-idea-ce"] $ws4
-    assign [class="thunderbird"] $ws5
-    assign [class="Virt-manager"] $ws6
+    bindsym $mod+Shift+w move container to workspace $ws6
 
 #
 # Layout stuff:
@@ -158,12 +149,6 @@ client.background       $nord00
 
     # decrease keyboard brightness
     bindsym XF86KbdBrightnessDown exec sudo light -s sysfs/leds/smc::kbd\baacklight -U 5
-
-#
-# Scratchpad
-#
-bindsym $mod+slash exec ~/.scripts/scratchpad
-for_window [class="scratchpad"] move scratchpad
 
 #
 # Resizing containers:

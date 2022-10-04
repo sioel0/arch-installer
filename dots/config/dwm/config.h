@@ -38,7 +38,7 @@ static const Rule rules[] = {
 };
 
 /* layout(s) */
-static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.52; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
@@ -76,7 +76,7 @@ static const char *incr_vl[] = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "
 static const char *decr_vl[] = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%", NULL };
 static const char *tel_des[] = { "telegram-desktop", NULL };
 static const char *ghidra[]  = { "ghidra", NULL };
-static const char *lock[]    = { "i3lock", "-i", "/home/sioel0/Pictures/lock.png", NULL };
+static const char *lock[]    = { "i3lock", "-i", "/home/sioel0/Pictures/rick_and_morty_mushrooms.png", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -89,8 +89,8 @@ static const Key keys[] = {
  	{ MODKEY,                       XK_slash,  togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
-	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
-	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.02} },
+	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.02} },
 	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
 	{ MODKEY|ShiftMask,             XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_q,      killclient,     {0} },

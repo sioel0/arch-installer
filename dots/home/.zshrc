@@ -40,6 +40,8 @@ alias sctl='sudo systemctl'
 alias ssh='ssh -X'
 alias p='sudo pacman'
 alias v='nvim'
+alias ghidra='_JAVA_AWT_WM_NONREPARENTING=1 ghidra'
+
 # rpi pico env setup
 export PICO_SDK_PATH='/home/sioel0/Projects/pico/pico-sdk/'
 export PICO_EXAMPLES_PATH='/home/sioel0/Projects/pico/pico-examples/'

@@ -18,8 +18,8 @@ focus_follows_mouse no
 mouse_warping none
 workspace_auto_back_and_forth yes
 focus_on_window_activation smart
-gaps inner 8
-gaps outer 4
+# gaps inner 8
+# gaps outer 4
 font pango:DejaVu Sans Mono 1
 
 ### Colors
@@ -99,20 +99,20 @@ client.background       $nord00
     set $ws6 6
 
     # Switch to workspace
-    bindsym $mod+f workspace $ws1
-    bindsym $mod+s workspace $ws2
-    bindsym $mod+a workspace $ws3
-    bindsym $mod+v workspace $ws4
-    bindsym $mod+e workspace $ws5
-    bindsym $mod+w workspace $ws6
+    bindsym $mod+1 workspace $ws1
+    bindsym $mod+2 workspace $ws2
+    bindsym $mod+3 workspace $ws3
+    bindsym $mod+4 workspace $ws4
+    bindsym $mod+5 workspace $ws5
+    bindsym $mod+6 workspace $ws6
 
     # Move focused container to workspace
-    bindsym $mod+Shift+f move container to workspace $ws1
-    bindsym $mod+Shift+s move container to workspace $ws2
-    bindsym $mod+Shift+a move container to workspace $ws3
-    bindsym $mod+Shift+v move container to workspace $ws4
-    bindsym $mod+Shift+e move container to workspace $ws5
-    bindsym $mod+Shift+w move container to workspace $ws6
+    bindsym $mod+Shift+1 move container to workspace $ws1
+    bindsym $mod+Shift+2 move container to workspace $ws2
+    bindsym $mod+Shift+3 move container to workspace $ws3
+    bindsym $mod+Shift+4 move container to workspace $ws4
+    bindsym $mod+Shift+5 move container to workspace $ws5
+    bindsym $mod+Shift+6 move container to workspace $ws6
 
 #
 # Layout stuff:
@@ -200,7 +200,7 @@ exec nitrogen --restore
 
 exec autotiling
 
-exec picom -b
+# exec picom -b
 
 exec_always setxkbmap us -variant altgr-intl
 

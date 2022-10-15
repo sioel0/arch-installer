@@ -1,4 +1,4 @@
-- name: Arch Linux Installation script, Arch+i3
+- name: Arch Linux Installation script, Arch + Sway
   connection: local
   hosts: localhost
   tasks:
@@ -16,21 +16,15 @@
           # aestethic
           - lolcat
           - figlet
-          - cowsay
           - neofetch
-          - sl
-          # wm
-          - i3-gaps
-          - i3status
-          - i3lock
-          - rofi
-          - nitrogen
-          - xorg
-          - xorg-server
-          - xorg-xmodmap
-          - xorg-xrdb
-          - dunst
-          - picom
+          # wm sway
+          - sway
+          - swaylock
+          - swayidle
+          - swaybg
+          - waybar
+          - clipman
+          - wofi
           # system configuration
           - light
           - pavucontrol
@@ -41,12 +35,10 @@
           - tmux
           - bat
           - stow
-          - zoxide
           - nmap
           - ripgrep
           - wireshark-cli
           - wireshark-qt
-          - fuse
           - lxappearance
           - polkit
           - lxsession
@@ -59,11 +51,6 @@
           - neovim
           - python-pynvim
           - rustup
-          # rpi-pico stuff
-          - cmake
-          - minicom
-          - arm-none-eabi-gcc
-          - arm-none-eabi-newlib
           # virtualization
           - docker
           - virt-manager
@@ -76,6 +63,7 @@
           - radare2
           - r2ghidra
           - pwndbg
+          - debuginfod
           # vpn
           - tailscale
           - openvpn
@@ -84,9 +72,9 @@
           - libreoffice
           - firefox
           - chromium
-          - thunderbird
           - zathura
           - zathura-pdf-mupdf
+          - kalendar
           - pcmanfm
           # terminal
           - alacritty
@@ -99,15 +87,6 @@
     - name: Enable services
       shell:
         cmd: sudo systemctl enable bumblebeed laptop-mode tailscaled ly libvirtd docker
-    
-    - name: Create basic directories structure
-      file:
-        path: 
-          - ~/Projects
-          - ~/Downloads
-          - ~/Documents
-          - ~/Pictures
-        state: directory
 
     - name: Make zathura the default pdfviewer
       shell:
@@ -125,12 +104,6 @@
         src: dots/sys/30-touchpad.conf
         dest: /etc/X11/xorg.conf.d/30-touchpad.conf
 
-    - name: Add dwm.desktop file
-      become: True
-      copy:
-        src: dots/sys/dwm.desktop
-        dest: /usr/share/xsessions/dwm.desktop
-
     - name: Install packer, neovim's plugin manager
       git:
         repo: https://github.com/wbthomason/packer.nvim
@@ -140,8 +113,9 @@
 
     - name: Add neovim configuration
       git:
-        repo: git@github.com:sioel0/slnvim
+        repo: https://github.com/NVChad/NVChad
         dest: ~/.config/nvim
+        depth: 1
         clone: yes
         update: yes
 
@@ -205,36 +179,3 @@
       user:
         name: "{{ansible_user_id}}"
         shell: /usr/bin/zsh
-
-    - name: Create pico home dir
-      file:
-        path: ~/Projects/pico
-        state: directory
-
-    - name: Download pico-sdk
-      git:
-        repo: https://github.com/raspberrypi/pico-sdk
-        dest: ~/Projects/pico/pico-sdk
-        clone: yes
-        update: yes
-
-    - name: Download pico-extras
-      git:
-        repo: https://github.com/raspberrypi/pico-extras
-        dest: ~/Projects/pico/pico-extras
-        clone: yes
-        update: yes
-
-    - name: Download pico-examples
-      git:
-        repo: https://github.com/raspberrypi/pico-examples
-        dest: ~/Projects/pico/pico-examples
-        clone: yes
-        update: yes
-
-    - name: Download pico-playground
-      git:
-        repo: https://github.com/raspberrypi/pico-playground
-        dest: ~/Projects/pico/pico-playground
-        clone: yes
-        update: yes

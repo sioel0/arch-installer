@@ -1,0 +1,155 @@
+#############
+# Variables #
+#############
+# modKey as Alt
+set $mod mod1
+# setup terminal
+set $term alacritty
+# set direction keys
+set $left h
+set $right l
+set $up k
+set $down j
+# app launcher
+set $menu wofi -S drun -p "Run: " 
+# lock screen command
+set $lockscreen /home/sioel0/Pictures/rick_and_morty_mushrooms.png
+set $locker swaylock -f -i $lockscreen -s fill
+# appearance variables
+set $wallpaper /home/sioel0/Pictures/rick_and_morty_heads.jpg
+# colorscheme NORD
+set $nord00 #2E3440
+set $nord01 #3B4252
+set $nord02 #434C5E
+set $nord03 #4C566A
+set $nord04 #D8DEE9
+set $nord05 #E5E9F0
+set $nord06 #ECEFF4
+set $nord07 #8FBCBB
+set $nord08 #88C0D0
+set $nord09 #81A1C1
+set $nord10 #5E81AC
+set $nord11 #BF616A
+set $nord12 #D08770
+set $nord13 #EBCB8B
+set $nord14 #A3BE8C
+set $nord15 #B48EAD
+# workspaces
+set $ws1 1
+set $ws2 2
+set $ws3 3
+set $ws4 4
+set $ws5 5
+
+##############
+# Appearance #
+##############
+default_border pixel 1
+focus_follows_mouse yes
+mouse_warping none
+workspace_auto_back_and_forth no
+focus_on_window_activation smart
+gaps inner 4
+gaps outer 2
+font pango:DejaVu Sans Mono 1
+
+# class                 border  bground text   indicator child_border
+client.focused          $nord08  $nord08  $nord05 $nord08    $nord08
+client.focused_inactive $nord10  $nord10  $nord05 $nord10    $nord10
+client.unfocused        $nord00  $nord00  $nord04 $nord00    $nord00
+client.urgent           $nord04  $nord11  $nord06 $nord11    $nord11
+client.placeholder      $nord00  $nord00  $nord05 $nord00    $nord00
+
+client.background       $nord00
+
+################
+# Key Bindings #
+################
+floating_modifier $mod
+# start a terminal
+bindsym $mod+Return exec $term
+# kill focused window
+bindsym $mod+q kill
+bindsym $mod+Shift+q kill
+# start launcher
+bindsym $mod+d exec $menu
+# reload config file
+bindsym $mod+shift+r reload
+# exit sway
+bindsym $mod+Shift+e exec swaymsg exit
+# Move your focus around
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+# Move the focused window with the same, but add Shift
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+# Switch to workspace
+bindsym $mod+a workspace $ws1
+bindsym $mod+s workspace $ws2
+bindsym $mod+f workspace $ws3
+bindsym $mod+w workspace $ws4
+bindsym $mod+v workspace $ws5
+# Move focused container to workspace
+bindsym $mod+Shift+a move container to workspace $ws1
+bindsym $mod+Shift+s move container to workspace $ws2
+bindsym $mod+Shift+f move container to workspace $ws3
+bindsym $mod+Shift+w move container to workspace $ws4
+bindsym $mod+Shift+v move container to workspace $ws5
+#### Layout commands
+bindsym $mod+t toggle split
+bindsym $mod+m fullscreen
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+#### Resize mode
+mode "resize" {
+  bindsym $left resize shrink width 5px
+  bindsym $right resize grow width 5px
+  bindsym $up resize grow height 5px
+  bindsym $down resize shrink height 5px
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+#### Media management
+bindsym XF86AudioRaiseVolume  exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume  exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute         exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toogle
+bindsym XF86MonBrightnessUp   exec sudo light -A 5
+bindsym XF86MonBrightnessDown exec sudo light -U 5
+bindsym XF86KbdBrightnessUp   exec sudo light -s sysfs/leds/smc::kbd\_backlight -A 5
+bindsym XF86KbdBrightnessDown exec sudo light -s sysfs/leds/smc::kbd\baacklight -U 5
+# programs shortcuts
+bindsym $mod+Shift+x exec $locker
+bindsym $mod+Shift+t exec telegram-desktop
+bindsym $mod+g exec ghidra
+bindsym $mod+c exec chromium
+bindsym $mod+z exec zathura
+
+##############
+# Status Bar #
+##############
+bar {
+    swaybar_command waybar
+    workspace_buttons yes
+}
+
+################
+# Startup apps #
+################
+exec telegram-desktop -startintray
+exec swaybg -i $wallpaper -m fill
+exec autotiling
+exec lxpolkit
+
+#########
+# Input #
+#########
+input "type:keyboard" {
+  xkb_layout us
+  xkb_variant altgr-intl
+  xkb_options ctrl:nocaps
+}

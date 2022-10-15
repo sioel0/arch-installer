@@ -1,6 +1,6 @@
 {
   "height": 30,
-  "position": "bottom",
+  "position": "top",
   "spacing": 4,
   "modules-left": ["sway/workspaces", "sway/mode"],
   "modules-center": ["clock"],
@@ -12,8 +12,7 @@
       "spacing": 6
   },
   "clock": {
-      "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-      "format-alt": "{:%Y-%m-%d}",
+      "format": "{:%H:%M  %Y-%m-%d}",
       "on-click": "kalendar"
   },
   "battery": {
@@ -23,8 +22,8 @@
           "critical": 15
       },
       "format": "{capacity}% {icon}",
-      "format-charging": "{capacity}% ",
-      "format-plugged": "{capacity}% ",
+      "format-charging": "{capacity}% ",
+      /* "format-plugged": "{capacity}% ", */
       "format-alt": "{time} {icon}",
       // "format-good": "", // An empty format will hide the module
       // "format-full": "",
@@ -48,5 +47,9 @@
           "default": ["", "", ""]
       },
       "on-click": "pavucontrol"
-    },
+  },  
+  "network": {
+      "format-ethernet": " {ipaddr}",
+      "format-wifi": " {ipaddr} | {essid}",
+  },
 }

@@ -56,8 +56,5 @@ alias gps='git push origin'
 alias gf='git fetch'
 alias gpl='git pull origin'
 
-# setup zoxide
-eval "$(zoxide init zsh)"
-
 # load powerlevel10k configuration
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

@@ -23,7 +23,7 @@
           - swayidle
           - swaybg
           - waybar
-          - clipman
+          - wl-clipboard
           - wofi
           # system configuration
           - light
@@ -74,7 +74,8 @@
           - chromium
           - zathura
           - zathura-pdf-mupdf
-          - kalendar
+          - thunderbird
+          - fuse
           - pcmanfm
           # terminal
           - alacritty

@@ -35,11 +35,11 @@ set $nord13 #EBCB8B
 set $nord14 #A3BE8C
 set $nord15 #B48EAD
 # workspaces
-set $ws1 1
-set $ws2 2
-set $ws3 3
-set $ws4 4
-set $ws5 5
+set $ws1 a
+set $ws2 s
+set $ws3 f
+set $ws4 w
+set $ws5 v
 
 ##############
 # Appearance #
@@ -128,6 +128,9 @@ bindsym $mod+Shift+t exec telegram-desktop
 bindsym $mod+g exec ghidra
 bindsym $mod+c exec chromium
 bindsym $mod+z exec zathura
+# notification management
+bindsym $mod+n exec makoctl dismiss
+bindsym $mod+Shift+n exec makoctl dismiss --all
 
 ##############
 # Status Bar #
@@ -144,6 +147,8 @@ exec telegram-desktop -startintray
 exec swaybg -i $wallpaper -m fill
 exec autotiling
 exec lxpolkit
+exec gsettings set org.gnome.desktop.interface gtk-theme "Nordic-bluish-accent-standard-buttons"
+exec mako
 
 #########
 # Input #
@@ -153,3 +158,17 @@ input "type:keyboard" {
   xkb_variant altgr-intl
   xkb_options ctrl:nocaps
 }
+
+input "type:touchpad" {
+  tap enabled
+  natural_scroll enabled
+}
+
+########
+# Idle #
+########
+exec swayidle -w \
+  timeout 300 'exec $locker' \
+  timeout 600 'swaymsg "output * dpms off"' \
+  resume 'swaymsg "output * dpms on"' \
+  before-sleep 'exec $locker'

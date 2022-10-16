@@ -4,7 +4,7 @@
   "spacing": 4,
   "modules-left": ["sway/workspaces", "sway/mode"],
   "modules-center": ["clock"],
-  "modules-right": ["pulseaudio", "network", "battery", "tray"],
+  "modules-right": ["network", "pulseaudio", "battery", "tray"],
   "sway/mode": {
       "format": "<span style=\"italic\">{}</span>"
   },
@@ -50,6 +50,8 @@
   },  
   "network": {
       "format-ethernet": " {ipaddr}",
-      "format-wifi": " {ipaddr} | {essid}",
+      "format-wifi": " {ipaddr}({essid})",
+      "format-disconnected": "",
+      "on-click": "alacritty -e nmtui"
   },
 }

@@ -3,6 +3,7 @@
 #############
 # modKey as Alt
 set $mod mod1
+set $win mod4
 # setup terminal
 set $term alacritty
 # set direction keys
@@ -12,6 +13,7 @@ set $up k
 set $down j
 # app launcher
 set $menu wofi -S drun -p "Run: " 
+set $dmenu wofi -S run -p "Run: "
 # lock screen command
 set $lockscreen /home/sioel0/Pictures/rick_and_morty_mushrooms.png
 set $locker swaylock -f -i $lockscreen -s fill
@@ -35,16 +37,17 @@ set $nord13 #EBCB8B
 set $nord14 #A3BE8C
 set $nord15 #B48EAD
 # workspaces
-set $ws1 a
-set $ws2 s
-set $ws3 f
-set $ws4 w
-set $ws5 v
+set $ws1 1
+set $ws2 2
+set $ws3 3
+set $ws4 4
+set $ws5 5
+set $ws6 6
 
 ##############
 # Appearance #
 ##############
-default_border pixel 1
+default_border pixel 3
 focus_follows_mouse yes
 mouse_warping none
 workspace_auto_back_and_forth no
@@ -73,10 +76,11 @@ bindsym $mod+q kill
 bindsym $mod+Shift+q kill
 # start launcher
 bindsym $mod+d exec $menu
+bindsym $mod+Shift+d exec $dmenu
 # reload config file
 bindsym $mod+shift+r reload
 # exit sway
-bindsym $mod+Shift+e exec swaymsg exit
+bindsym $mod+Shift+e exec ~/.scripts/logout_menu
 # Move your focus around
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
@@ -88,17 +92,19 @@ bindsym $mod+Shift+$down move down
 bindsym $mod+Shift+$up move up
 bindsym $mod+Shift+$right move right
 # Switch to workspace
-bindsym $mod+a workspace $ws1
+bindsym $mod+f workspace $ws1
 bindsym $mod+s workspace $ws2
-bindsym $mod+f workspace $ws3
+bindsym $mod+a workspace $ws3
 bindsym $mod+w workspace $ws4
 bindsym $mod+v workspace $ws5
+bindsym $mod+i workspace $ws6
 # Move focused container to workspace
-bindsym $mod+Shift+a move container to workspace $ws1
+bindsym $mod+Shift+f move container to workspace $ws1
 bindsym $mod+Shift+s move container to workspace $ws2
-bindsym $mod+Shift+f move container to workspace $ws3
+bindsym $mod+Shift+a move container to workspace $ws3
 bindsym $mod+Shift+w move container to workspace $ws4
 bindsym $mod+Shift+v move container to workspace $ws5
+bindsym $mod+Shift+i move container to workspace $ws6
 #### Layout commands
 bindsym $mod+t toggle split
 bindsym $mod+m fullscreen
@@ -114,6 +120,16 @@ mode "resize" {
   bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
+#### Screen setup mode
+mode "screen" {
+  bindsym m exec ~/.scripts/screen_setup/monitor
+  bindsym d exec ~/.scripts/screen_setup/desktop
+  bindsym $right exec ~/.scripts/screen_setup/ext_right
+  bindsym $left exec ~/.scripts/screen_setup/ext_left
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+bindsym $win+Shift+s mode "screen"
 #### Media management
 bindsym XF86AudioRaiseVolume  exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioLowerVolume  exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
@@ -125,12 +141,15 @@ bindsym XF86KbdBrightnessDown exec sudo light -s sysfs/leds/smc::kbd\baacklight 
 # programs shortcuts
 bindsym $mod+Shift+x exec $locker
 bindsym $mod+Shift+t exec telegram-desktop
-bindsym $mod+g exec ghidra
 bindsym $mod+c exec chromium
-bindsym $mod+z exec zathura
 # notification management
 bindsym $mod+n exec makoctl dismiss
 bindsym $mod+Shift+n exec makoctl dismiss --all
+# custom scripts
+bindsym $win+s exec ~/.scripts/qute_menu
+bindsym $win+p exec ~/.scripts/take_screenshot
+# open kdocker to reduce to tray an app
+bindsym $win+d exec kdocker
 
 ##############
 # Status Bar #
@@ -149,6 +168,7 @@ exec autotiling
 exec lxpolkit
 exec gsettings set org.gnome.desktop.interface gtk-theme "Nordic-bluish-accent-standard-buttons"
 exec mako
+exec ~/.scripts/screen_startup
 
 #########
 # Input #

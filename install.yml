@@ -25,6 +25,8 @@
           - waybar
           - wl-clipboard
           - wofi
+          - grim
+          - slurp
           # system configuration
           - light
           - pavucontrol

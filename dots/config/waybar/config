@@ -13,7 +13,7 @@
   },
   "clock": {
       "format": "{:%H:%M  %Y-%m-%d}",
-      "on-click": "kalendar"
+      "on-click": "morgen"
   },
   "battery": {
       "states": {

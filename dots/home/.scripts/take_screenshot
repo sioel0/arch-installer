@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# destination folder
+DEST=~/Pictures/Screenshots
+
+# geometry
+GEOM=$(slurp)
+
+if [[ $GEOM == "selection cancelled" ]]; then
+  exit 1
+else
+  grim -g "$GEOM" "$DEST/screenshot_$(date +%F-%H:%M:%S).png"
+  exit 0
+fi

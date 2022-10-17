@@ -82,6 +82,7 @@
           # terminal
           - alacritty
           - zsh
+          - lsd
           # fonts
           - ttf-fira-code
           - ttf-font-awesome

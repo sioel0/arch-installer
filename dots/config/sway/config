@@ -162,13 +162,12 @@ bar {
 ################
 # Startup apps #
 ################
-exec telegram-desktop -startintray
 exec swaybg -i $wallpaper -m fill
 exec autotiling
 exec lxpolkit
 exec gsettings set org.gnome.desktop.interface gtk-theme "Nordic-bluish-accent-standard-buttons"
 exec mako
-exec ~/.scripts/screen_startup
+exec ~/.scripts/startup_sway
 
 #########
 # Input #

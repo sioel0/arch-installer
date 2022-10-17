@@ -32,7 +32,7 @@ export ANSIBLE_NOCOWS=1
 # aliases
 alias cat='bat'
 alias gdb='gdb -q'
-alias ls='ls --color=auto'
+alias ls='lsd'
 alias ll='ls -l'
 alias la='ls -la'
 alias sv='sudo nvim'

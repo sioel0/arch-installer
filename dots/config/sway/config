@@ -167,7 +167,7 @@ exec autotiling
 exec lxpolkit
 exec gsettings set org.gnome.desktop.interface gtk-theme "Nordic-bluish-accent-standard-buttons"
 exec mako
-exec ~/.scripts/startup_sway
+# exec ~/.scripts/startup_sway
 
 #########
 # Input #

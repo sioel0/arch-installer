@@ -117,7 +117,7 @@
 
     - name: Add neovim configuration
       git:
-        repo: https://github.com/NVChad/NVChad
+        repo: git@github.com:sioel0/slnvim
         dest: ~/.config/nvim
         depth: 1
         clone: yes

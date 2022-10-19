@@ -1,8 +1,8 @@
 {
   "height": 30,
   "position": "top",
-  "spacing": 4,
-  "modules-left": ["sway/workspaces", "sway/mode"],
+  "spacing": 5,
+  "modules-left": ["idle_inhibitor", "sway/workspaces", "sway/mode"],
   "modules-center": ["clock"],
   "modules-right": ["network", "pulseaudio", "battery", "tray"],
   "sway/mode": {
@@ -28,6 +28,13 @@
       // "format-good": "", // An empty format will hide the module
       // "format-full": "",
       "format-icons": ["", "", "", "", ""]
+  },
+  "idle_inhibitor": {
+      "format": "{icon}",
+      "format-icons": {
+          "activated": "",
+          "deactivated": ""
+      }
   },
   "pulseaudio": {
       // "scroll-step": 1, // %, can be a float

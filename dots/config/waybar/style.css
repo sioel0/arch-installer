@@ -1,9 +1,7 @@
 * {
     border: none;
-    border-radius: 0;
-    font-family: "JetBrains Mono NF";
+    font-family: FontAwesome, JetBrains Mono NF;
     font-size: 14px;
-    min-height: 0;
 }
 
 window#waybar {
@@ -63,6 +61,17 @@ window#waybar {
     animation-direction: alternate;
 }
 
+#idle_inhibitor {
+  font-size: 20px;
+  background-color: #7aa2f7;
+  border-right: 8px solid #7aa2f7;
+  border-left: 8px solid #7aa2f7;
+}
+
+#idle_inhibitor.activated {
+    color: #f7768e;
+}
+
 #cpu {
 }
 
@@ -83,4 +92,7 @@ window#waybar {
 }
 
 #tray {
+}
+
+#custom-arch {
 }

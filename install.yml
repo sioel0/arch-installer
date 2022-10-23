@@ -141,6 +141,12 @@
         scope: global
         value: "{{email}}"
 
+    - name: Sign commits by default
+      git_config:
+        name: commit.gpgsign
+        scope: global
+        value: true
+
     - name: Install tmux plugin manager tpm
       git:
         repo: https://github.com/tmux-plugins/tpm

@@ -8,7 +8,7 @@ declare -a options=(
 "Region"
 )
 
-CHOICE=$(printf '%s\n' "${options[@]}" | wofi -d -p Option:)
+CHOICE=$(printf '%s\n' "${options[@]}" | tofi --prompt-text "Screenshot " --width 360)
 echo $CHOICE
 
 if [[ $CHOICE == "Region" ]]; then

@@ -5,7 +5,7 @@
 }
 
 window#waybar {
-    background-color: rgba(43, 48, 59, 0.5);
+  background: transparent;
     color: white;
 }
 
@@ -17,12 +17,12 @@ window#waybar {
 }
 
 #workspaces button.focused {
-    color: #7aa2f7;
-    border-top: 2px solid #7aa2f7;
+    color: #e3c78a;
+    border-top: 2px solid #e3c78a;
 }
 
 #mode {
-    background: rgba(192, 202, 245, 0.5);
+    background: rgba(178, 178, 178, 0.5);
     border-bottom: 3px solid white;
 }
 
@@ -63,13 +63,13 @@ window#waybar {
 
 #idle_inhibitor {
   font-size: 20px;
-  background-color: #7aa2f7;
-  border-right: 8px solid #7aa2f7;
-  border-left: 8px solid #7aa2f7;
+  background-color: #80a0ff;
+  border-right: 8px solid #80a0ff;
+  border-left: 8px solid #80a0ff;
 }
 
 #idle_inhibitor.activated {
-    color: #f7768e;
+    color: #ff5454;
 }
 
 #cpu {
@@ -82,7 +82,7 @@ window#waybar {
 }
 
 #network.disconnected {
-    color: #f7768e;
+    color: #ff5454;
 }
 
 #pulseaudio {
@@ -92,7 +92,4 @@ window#waybar {
 }
 
 #tray {
-}
-
-#custom-arch {
 }

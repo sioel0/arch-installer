@@ -3,10 +3,9 @@
 declare -a options=(
 "logout"
 "reboot"
-"shutdown"
-"quit"
+"poweroff"
 )
-CHOICE=$(printf '%s\n' "${options[@]}" | wofi -d -p "Choice:")
+CHOICE=$(printf '%s\n' "${options[@]}" | tofi --prompt-text "" --width 320 --outline-color ff5454 --selection-color ff5454)
 
 case $CHOICE in
   'logout')
@@ -15,11 +14,8 @@ case $CHOICE in
   'reboot')
     sudo reboot
   ;;
-  'shutdown')
+  'poweroff')
     sudo poweroff
-  ;;
-  'quit')
-    exit 0
   ;;
   *)
     exit 0

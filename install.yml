@@ -90,7 +90,7 @@
 
     - name: Enable services
       shell:
-        cmd: sudo systemctl enable "{{services}}" 
+        cmd: sudo systemctl enable bumblebeed laptop-mode tailscaled ly libvirtd docker
 
     - name: Make zathura the default pdfviewer
       shell:

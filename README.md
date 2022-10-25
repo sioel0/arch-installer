@@ -34,3 +34,8 @@ tofi
 wdisplays
 wob
 ```
+
+## TODO
+- [ ] Split it in modules
+- [ ] Dotfiles installation from script
+- [ ] IntellijIdea ToolBox installation

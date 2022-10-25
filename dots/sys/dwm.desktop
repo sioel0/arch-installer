@@ -1,7 +1,0 @@
-[Desktop Entry]
-Name=DWM
-Exec=/usr/local/bin/dwm
-Encoding=UTF-8
-Icon=dwm
-Type=XSession
-Comment=Dynamic Window Manager that sucks less

@@ -90,7 +90,7 @@
 
     - name: Enable services
       shell:
-        cmd: sudo systemctl enable bumblebeed laptop-mode tailscaled ly libvirtd docker
+        cmd: sudo systemctl enable "{{services}}" 
 
     - name: Make zathura the default pdfviewer
       shell:
@@ -147,13 +147,6 @@
         scope: global
         value: true
 
-    - name: Install tmux plugin manager tpm
-      git:
-        repo: https://github.com/tmux-plugins/tpm
-        dest: ~/.tmux/plugins/tpm
-        clone: yes
-        update: yes
-
     - name: Install oh-my-zsh
       shell:
         cmd: sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" -s -- -y
@@ -180,9 +173,12 @@
         clone: yes
         update: yes
 
-    - name: Setup dotfiles
-      shell:
-        cmd: dots/install.sh
+    - name: Download dotfiles
+      git:
+        repo: git@github.com:sioel0/dotfiles
+        dest: ~/Projects/dotfiles
+        clone: yes
+        update: yes
 
     - name: Set zsh as default user shell
       become: True

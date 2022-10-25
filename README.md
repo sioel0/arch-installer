@@ -18,3 +18,19 @@ ansible-playbook install.yml --ask-become-pass --extra-vars "username=<GIT_USER.
 
 Aur packages are not managed using this script so you need to install them
 manually.
+
+# AUR packages that I use
+```
+autotiling
+cnijfilter2
+kdocker
+laptop-mode-tools-git
+ly
+macho
+morgen-bin
+pwninit-bin
+spotify
+tofi
+wdisplays
+wob
+```

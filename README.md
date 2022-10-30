@@ -27,8 +27,6 @@ kdocker
 laptop-mode-tools-git
 ly
 macho
-morgen-bin
-pwninit-bin
 spotify
 tofi
 wdisplays

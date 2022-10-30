@@ -44,6 +44,7 @@
           - lxappearance
           - polkit
           - lxsession
+          - cups
           # development
           - git
           - jdk17-openjdk
@@ -60,12 +61,6 @@
           - libvirt
           - edk2-ovmf
           - dnsmasq
-          # binary exp tools
-          - ghidra
-          - radare2
-          - r2ghidra
-          - pwndbg
-          - debuginfod
           # vpn
           - tailscale
           - openvpn
@@ -90,7 +85,7 @@
 
     - name: Enable services
       shell:
-        cmd: sudo systemctl enable bumblebeed laptop-mode tailscaled ly libvirtd docker
+        cmd: sudo systemctl enable bumblebeed laptop-mode tailscaled ly libvirtd docker cups
 
     - name: Make zathura the default pdfviewer
       shell:

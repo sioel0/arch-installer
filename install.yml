@@ -21,6 +21,7 @@
           - wofi
           - grim
           - slurp
+          - macho
           # system configuration
           - light
           - pavucontrol

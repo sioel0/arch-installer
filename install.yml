@@ -36,8 +36,6 @@
           - npm
           - nmap
           - ripgrep
-          - wireshark-cli
-          - wireshark-qt
           - lxappearance
           - polkit
           - lxsession
@@ -132,7 +130,6 @@
         dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
         clone: yes
         update: yes
-            
 
     - name: Install zsh-syntax-highlighting
       git:

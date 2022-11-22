@@ -11,17 +11,14 @@
           - lolcat
           - figlet
           - neofetch
-          # wm sway
-          - sway
-          - swaylock
-          - swayidle
-          - swaybg
-          - waybar
-          - wl-clipboard
-          - wofi
-          - grim
-          - slurp
-          - macho
+          # wm dwm
+          - dunst
+          - xorg-server
+          - xorg-xinit
+          - libx11
+          - libxinerama
+          - libxft
+          - webkit2gtk
           # system configuration
           - light
           - pavucontrol
@@ -71,7 +68,7 @@
           - fuse
           - pcmanfm
           # terminal
-          - foot
+          - alacritty
           - zsh
           - lsd
           # fonts

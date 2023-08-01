@@ -1,4 +1,4 @@
-- name: Arch Linux Installation script, Arch + Sway
+- name: Arch Linux Installation script, Arch + Hyprland
   connection: local
   hosts: localhost
   tasks:
@@ -11,18 +11,19 @@
           - lolcat
           - figlet
           - neofetch
-          # wm dwm
-          - dunst
-          - xorg-server
-          - xorg-xinit
-          - libx11
-          - libxinerama
-          - libxft
-          - webkit2gtk
+          # wm
+          - hyprland
+          - swaylock
+          - swaybg
+          - xdg-desktop-portal-hyprland
+          - polkit-kde-agent
+          - qt5-wayland
+          - qt6-wayland
+          - mako
+          - cliphist
           # system configuration
           - light
           - pavucontrol
-          - libinput
           - bumblebee
           # utilities
           - htop
@@ -30,22 +31,17 @@
           - bat
           - stow
           - unzip
-          - npm
           - nmap
           - ripgrep
-          - lxappearance
           - polkit
-          - lxsession
           - xorg-xwayland
-          - cups
+          - udisks2
+          - slurp
+          - grim
           # development
           - git
-          - jdk17-openjdk
           - base-devel
-          - texlive-most
-          - texstudio
-          - neovim
-          - python-pynvim
+          - helix
           - rustup
           # virtualization
           - docker
@@ -61,55 +57,44 @@
           - telegram-desktop
           - libreoffice
           - firefox
-          - chromium
           - zathura
           - zathura-pdf-mupdf
           - thunderbird
-          - fuse
           - pcmanfm
           # terminal
-          - alacritty
+          - foot
           - zsh
           - lsd
           # fonts
           - ttf-fira-code
           - ttf-font-awesome
-          - tamsyn-font
         state: present
 
     - name: Enable services
       shell:
-        cmd: sudo systemctl enable bumblebeed laptop-mode tailscaled libvirtd docker cups
+        cmd: sudo systemctl enable bumblebeed laptop-mode tailscaled libvirtd docker udisks2
 
     - name: Make zathura the default pdfviewer
       shell:
         cmd: xdg-mime default org.pwmt.zathura.desktop application/pdf
 
-    - name: Add neovim configuration
-      git:
-        repo: git@github.com:sioel0/slnvim
-        dest: ~/.config/nvim
-        depth: 1
-        clone: yes
-        update: yes
-
-    - name: Set nvim as git editor
+    - name: Set helix as git editor
       git_config:
         name: core.editor
         scope: global
-        value: nvim
+        value: helix
     
     - name: Set git user.name
       git_config:
         name: user.name
         scope: global
-        value: "{{username}}"
+        value: sioel0
 
     - name: Set git user.email
       git_config:
         name: user.email
         scope: global
-        value: "{{email}}"
+        value: leonisimone@pm.me
 
     - name: Sign commits by default
       git_config:
@@ -139,13 +124,6 @@
       git:
         repo: https://github.com/romkatv/powerlevel10k
         dest: ~/.oh-my-zsh/custom/themes/powerlevel10k
-        clone: yes
-        update: yes
-
-    - name: Download dotfiles
-      git:
-        repo: git@github.com:sioel0/dotfiles
-        dest: ~/Projects/dotfiles
         clone: yes
         update: yes
 

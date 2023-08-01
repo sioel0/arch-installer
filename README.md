@@ -21,15 +21,10 @@ manually.
 
 # AUR packages that I use
 ```
-autotiling
-cnijfilter2
-kdocker
 laptop-mode-tools-git
 ly
-macho
 spotify
 tofi
-wdisplays
 wob
 ```
 

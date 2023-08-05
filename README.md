@@ -13,11 +13,8 @@ Arch Linux installation script that works with Ansible.
 ## How to use
 To use the script run it with:
 ```
-ansible-playbook install.yml --ask-become-pass --extra-vars "username=<GIT_USER.NAME> email=<GIT_USER.EMAIL>"
+ansible-playbook install.yml --ask-become-pass --extra-vars "signing_key_gpg=<KEY>"
 ```
-
-Aur packages are not managed using this script so you need to install them
-manually.
 
 # AUR packages that I use
 ```
@@ -29,6 +26,4 @@ wob
 ```
 
 ## TODO
-- [ ] Split it in modules
 - [ ] Dotfiles installation from script
-- [ ] IntellijIdea ToolBox installation

@@ -3,6 +3,43 @@
   hosts: localhost
   tasks:
 
+    - name: Remove archinstall logs
+      ansible.builtin.file:
+        path: /var/log/archinstall
+        state: absent
+
+    - name: Update pacman.conf settings
+      become: True
+      lineinfile:
+        path: /etc/pacman.conf
+        regexp: "{{ item.regexp }}"
+        line: "{{ item.line }}"
+      loop:
+        - { regexp: '^#Color', line: 'Color' }
+        - { regexp: '^#VerbosePkgLists', line: 'VerbosePkgLists' }
+        - { regexp: '^#ParallelDownloads', line: 'ParallelDownloads = 10' }
+
+    - name: Install reflector
+      become: True
+      pacman:
+        name: reflector
+        state: present
+
+    - name: Update reflector settings
+      lineinfile:
+        path: /etc/xdg/reflector/reflector.conf
+        regexp: "{{ item.regexp }}"
+        line: "{{ item.line }}"
+      loop:
+        - { regexp: '^# --country France,Germany', line: '--country Italy,Germany, France' }
+        - { regexp: '^--latest', line: '--latest 50' }
+
+    - name: Enable Reflector.timer
+      systemd:
+        name: reflector.timer
+        state: started
+        enabled: yes
+  
     - name: Install packages
       become: True
       pacman:
@@ -68,9 +105,51 @@
           - ttf-font-awesome
         state: present
 
+    - name: Install rustup toolchain
+      shell:
+        cmd: rustup toolchain install stable
+
+    - name: Create aur_builder user for paru installation
+      user:
+        name: aur_builder
+        create_home: False
+ 
+    - name: Give aur_builder user pacman privileges
+      lineinfile:
+        path: /etc/sudoers.d/11_aur_builder
+        state: present
+        line: "aur_builder ALL+(ALL) NOPASSWD: /usr/bin/pacman"
+        create: yes
+        mode: 0644
+        validate: /usr/sbin/visudo -cf %s
+
+    - name: Install paru
+      become: yes
+      become_user: aur_builder
+      args:
+        creates: /usr/bin/paru
+      shell: |
+        git clone https://aur.archlinux.org/paru.git /tmp/paru
+        cd /tmp/paru
+        yes | makepkg -si
+        cd -
+        rm -rf /tmp/paru
+
+    - name: Install aur packages via paru
+      become: yes
+      become_user: aur_builder
+      pacman:
+        name:
+          - ly
+          - spotify
+          - wob
+          - tofi-git
+      executable: paru
+      state: present
+
     - name: Enable services
       shell:
-        cmd: sudo systemctl enable bumblebeed laptop-mode tailscaled libvirtd docker udisks2
+        cmd: sudo systemctl enable bumblebeed laptop-mode tailscaled libvirtd docker udisks2 ly
 
     - name: Make zathura the default pdfviewer
       shell:
@@ -142,3 +221,7 @@
       user:
         name: sioel0
         shell: /usr/bin/zsh
+
+    - name: Install dotfiles
+      shell:
+        cmd: ./install.sh

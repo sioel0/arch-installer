@@ -16,14 +16,7 @@ To use the script run it with:
 ansible-playbook install.yml --ask-become-pass --extra-vars "signing_key_gpg=<KEY>"
 ```
 
-# AUR packages that I use
+To extract the key value use:
 ```
-laptop-mode-tools-git
-ly
-spotify
-tofi
-wob
+gpg --list-private-keys --format=long
 ```
-
-## TODO
-- [ ] Dotfiles installation from script

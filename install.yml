@@ -224,6 +224,6 @@
 
     - name: Install dotfiles
       shell:
-        cmd: 
+        cmd: |
           cd dots
           ./install.sh

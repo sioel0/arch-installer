@@ -227,3 +227,21 @@
         cmd: 
           cd dots
           ./install.sh
+
+    - name: Change umask settings
+      become: True
+      lineinfile:
+        path: /etc/profile
+        regexp: '^umask 022'
+        line: 'umask 0077'
+
+    - name: Update faillock setup
+      become: True
+      lineinfile:
+        path: /etc/security/faillock.conf
+        regexp: '{{ item.regexp }}'
+        line: '{{ item.line }}'
+      loop:
+        - { regexp: '^# dir', line: 'dir = /var/lib/faillock' }
+        - { regexp: '^# deny', line: 'deny = 5' }
+        - { regexp: '^# unlock_time', line: 'unlock_time = 300' }

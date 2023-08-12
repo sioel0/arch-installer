@@ -5,7 +5,7 @@ declare -a options=(
 "reboot"
 "poweroff"
 )
-CHOICE=$(printf '%s\n' "${options[@]}" | tofi --selection-color ff5454)
+CHOICE=$(printf '%s\n' "${options[@]}" | tofi -c /home/sioel0/.config/tofi/shutdown)
 
 case $CHOICE in
   'logout')

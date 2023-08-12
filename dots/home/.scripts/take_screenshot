@@ -8,7 +8,7 @@ declare -a options=(
 "Region"
 )
 
-CHOICE=$(printf '%s\n' "${options[@]}" | tofi --prompt-text "Screenshot ")
+CHOICE=$(printf '%s\n' "${options[@]}" | tofi --prompt-text "Screenshot" -c /home/sioel0/.config/tofi/shutdown)
 echo $CHOICE
 
 if [[ $CHOICE == "Region" ]]; then

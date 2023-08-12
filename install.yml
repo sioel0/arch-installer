@@ -171,7 +171,7 @@
       git_config:
         name: user.email
         scope: global
-        value: leonisimone@pm.me
+        value: sioel0@pm.me
 
     - name: Sign commits by default
       git_config:

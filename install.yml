@@ -224,4 +224,6 @@
 
     - name: Install dotfiles
       shell:
-        cmd: ./install.sh
+        cmd: 
+          cd dots
+          ./install.sh

@@ -52,6 +52,7 @@
           - hyprland
           - swaylock
           - swaybg
+          - swayidle
           - xdg-desktop-portal-hyprland
           - polkit-kde-agent
           - qt5-wayland
@@ -74,6 +75,7 @@
           - udisks2
           - slurp
           - grim
+          - ufw
           # development
           - git
           - base-devel
@@ -110,11 +112,13 @@
         cmd: rustup toolchain install stable
 
     - name: Create aur_builder user for paru installation
+      become: True
       user:
         name: aur_builder
         create_home: False
  
     - name: Give aur_builder user pacman privileges
+      become: True
       lineinfile:
         path: /etc/sudoers.d/11_aur_builder
         state: present
@@ -124,7 +128,7 @@
         validate: /usr/sbin/visudo -cf %s
 
     - name: Install paru
-      become: yes
+      become: True
       become_user: aur_builder
       args:
         creates: /usr/bin/paru
@@ -136,7 +140,7 @@
         rm -rf /tmp/paru
 
     - name: Install aur packages via paru
-      become: yes
+      become: True
       become_user: aur_builder
       pacman:
         name:
@@ -227,3 +231,59 @@
         cmd: |
           cd dots
           ./install.sh
+
+    - name: Change umask settings
+      become: True
+      lineinfile:
+        path: /etc/profile
+        regexp: '^umask 022'
+        line: 'umask 0077'
+
+    - name: Update umask inside sudoers file
+      become: True
+      lineinfile:
+        path: /etc/sudoers
+        line: '{{ item.line }}'
+        create: yes
+        state: present
+      loop:
+        - { line: '# Umask setup' }
+        - { line: 'Defaults umask=0022' }
+        - { line: 'Defaults umask_override' }
+
+    - name: Add the possibility to use light without sudo
+      become: True
+      lineinfile:
+        path: /etc/sudoers.d/00_sioel0
+        line: 'sioel0 ALL=(ALL) NOPASSWD: /usr/bin/light'
+        state: present
+        create: yes
+        validate: /usr/sbin/visudo -cf %s
+
+    - name: Update access policies
+      become: True
+      lineinfile:
+        path: /etc/security/access.conf
+        line: '{{ item.line }}'
+        state: present
+      loop:
+        - { line: '+:sioel0:LOCAL' }
+        - { line: '-:ALL:ALL' }
+        - { line: '-:root:ALL' }
+
+    - name: Update faillock setup
+      become: True
+      lineinfile:
+        path: /etc/security/faillock.conf
+        regexp: '{{ item.regexp }}'
+        line: '{{ item.line }}'
+      loop:
+        - { regexp: '^# dir', line: 'dir = /var/lib/faillock' }
+        - { regexp: '^# deny', line: 'deny = 5' }
+        - { regexp: '^# unlock_time', line: 'unlock_time = 300' }
+
+    - name: Change ufw rules and enable it
+      shell:
+        cmd: |
+          ufw default deny
+          ufw enable

@@ -4,6 +4,7 @@
   tasks:
 
     - name: Remove archinstall logs
+      become: True
       ansible.builtin.file:
         path: /var/log/archinstall
         state: absent
@@ -26,6 +27,7 @@
         state: present
 
     - name: Update reflector settings
+      become: True
       lineinfile:
         path: /etc/xdg/reflector/reflector.conf
         regexp: "{{ item.regexp }}"
@@ -35,6 +37,7 @@
         - { regexp: '^--latest', line: '--latest 50' }
 
     - name: Enable Reflector.timer
+      become: True
       systemd:
         name: reflector.timer
         state: started
@@ -111,49 +114,42 @@
       shell:
         cmd: rustup toolchain install stable
 
-    - name: Create aur_builder user for paru installation
-      become: True
-      user:
-        name: aur_builder
-        create_home: False
- 
-    - name: Give aur_builder user pacman privileges
-      become: True
-      lineinfile:
-        path: /etc/sudoers.d/11_aur_builder
-        state: present
-        line: "aur_builder ALL+(ALL) NOPASSWD: /usr/bin/pacman"
-        create: yes
-        mode: 0644
-        validate: /usr/sbin/visudo -cf %s
-
     - name: Install paru
       become: True
-      become_user: aur_builder
+      become_user: sioel0
       args:
         creates: /usr/bin/paru
       shell: |
-        git clone https://aur.archlinux.org/paru.git /tmp/paru
+        git clone https://aur.archlinux.org/paru.git
         cd /tmp/paru
         yes | makepkg -si
         cd -
-        rm -rf /tmp/paru
+        rm -rf paru
 
     - name: Install aur packages via paru
       become: True
-      become_user: aur_builder
+      become_user: sioel0
       pacman:
         name:
           - ly
           - spotify
           - wob
           - tofi-git
-      executable: paru
-      state: present
+        executable: paru
+        state: present
 
     - name: Enable services
-      shell:
-        cmd: sudo systemctl enable bumblebeed laptop-mode tailscaled libvirtd docker udisks2 ly
+      become: True
+      systemd:
+        enabled: True
+        name: "{{ item }}"
+      with_items:
+        - ly
+        - bumblebeed
+        - tailscaled
+        - libvirtd
+        - docker
+        - udisks2
 
     - name: Make zathura the default pdfviewer
       shell:
@@ -283,6 +279,7 @@
         - { regexp: '^# unlock_time', line: 'unlock_time = 300' }
 
     - name: Change ufw rules and enable it
+      become: True
       shell:
         cmd: |
           ufw default deny

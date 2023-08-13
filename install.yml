@@ -79,6 +79,7 @@
           - slurp
           - grim
           - ufw
+          - ly
           # development
           - git
           - base-devel
@@ -128,15 +129,8 @@
 
     - name: Install aur packages via paru
       become: True
-      become_user: sioel0
-      pacman:
-        name:
-          - ly
-          - spotify
-          - wob
-          - tofi-git
-        executable: paru
-        state: present
+      shell:
+        cmd: paru -S --noconfirm --noprogressbar --needed wob tofi-git spotify
 
     - name: Enable services
       become: True

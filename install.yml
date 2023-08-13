@@ -121,7 +121,7 @@
         creates: /usr/bin/paru
       shell: |
         git clone https://aur.archlinux.org/paru.git
-        cd /tmp/paru
+        cd paru
         yes | makepkg -si
         cd -
         rm -rf paru

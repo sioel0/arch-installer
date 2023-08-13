@@ -13,7 +13,7 @@ Arch Linux installation script that works with Ansible.
 ## How to use
 To use the script run it with:
 ```
-ansible-playbook install.yml --ask-become-pass --extra-vars "signing_key_gpg=<KEY>"
+ansible-playbook install.yml --ask-become-pass --extra-vars "signing_gpg_key=<KEY>"
 ```
 
 To extract the key value use:

@@ -93,7 +93,10 @@ else
   disk_config="new.json"
 fi
 
-archinstall --config archinstall/config.json --creds archinstall/creds.json --disk_layouts archinstall/$disk_config --silent
+if [[ "$disk_config" == "new.json" ]]; then
+  archinstall --config archinstall/config.json --creds archinstall/creds.json
+else
+  archinstall --config archinstall/config.json --creds archinstall/creds.json --disk_layouts archinstall/$disk_config --silent
 
 # reset all file back to initial state
 sed -i "s|${disk}|HDD|g" archinstall/{config.json,disks.json}

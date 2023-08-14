@@ -103,3 +103,14 @@ sed -i "s|${host}|HOSTNAME|g" archinstall/config.json
 
 # remove user_credentials log file
 rm /var/log/archinstall/user_credentials.json
+
+# execute post installation tasks
+
+# if a new disk_layout has been created copy the configuration file to the new system
+if [[ "$1" == "" ]]; then
+  cp user_configuration.json /mnt/archinstall/home/sioel0/
+fi
+
+# create base directories and clone arch-installer to the new system
+mkdir /mnt/archinstall/home/sioel0/{Documents,Downloads,Pictures,Projects}
+git clone https://github.com/sioel0/arch-installer /mnt/archinstall/home/sioel0/Projects/arch-installer

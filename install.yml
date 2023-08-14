@@ -129,6 +129,7 @@
 
     - name: Install aur packages via paru
       become: True
+      become_user: sioel0
       shell:
         cmd: paru -S --noconfirm --noprogressbar --needed wob tofi-git spotify
 

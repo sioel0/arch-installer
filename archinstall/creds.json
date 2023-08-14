@@ -1,0 +1,8 @@
+{
+  "!encryption-password": "enc_pass",
+  "!users": [
+    "username": "sioel0",
+    "sudo": true,
+    "!password": "usr_pass"
+  ]
+}

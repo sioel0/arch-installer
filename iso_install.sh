@@ -79,7 +79,16 @@ sed -i "s|ENC_PASS|${enc_pass}|g" archinstall/creds.json
 sed -i "s|USR_PASS|${usr_pass}|g" archinstall/creds.json
 sed -i "s|HOSTNAME|${host}|g" archinstall/config.json
 
-archinstall --config archinstall/config.json --creds archinstall/creds.json --disk_layouts archinstall/disks.json
+if [[ "$1" != "" ]] && [[ "$1" == "--pc" ]]; then
+  # support to all my pc's (currently I only have one XD)
+  case $2 in
+    "x530fn") 
+      disk_config="x530fn.json"
+      ;;
+  esac
+else
+  disk_config="main.json"
+fi
 
 # reset all file back to initial state
 sed -i "s|${disk}|HDD|g" archinstall/{config.json,disks.json}

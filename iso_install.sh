@@ -85,10 +85,15 @@ if [[ "$1" != "" ]] && [[ "$1" == "--pc" ]]; then
     "x530fn") 
       disk_config="x530fn.json"
       ;;
+    "*")
+      echo "Unsupported pc/laptop. Aborting"
+      exit 1
   esac
 else
-  disk_config="main.json"
+  disk_config="new.json"
 fi
+
+archinstall --config archinstall/config.json --creds archinstall/creds.json --disk_layouts archinstall/$disk_config --silent
 
 # reset all file back to initial state
 sed -i "s|${disk}|HDD|g" archinstall/{config.json,disks.json}

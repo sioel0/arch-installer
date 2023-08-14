@@ -12,10 +12,10 @@ case $CHOICE in
     hyprctl dispatch exit
   ;;
   'reboot')
-    sudo reboot
+    reboot
   ;;
   'poweroff')
-    sudo poweroff
+    poweroff
   ;;
   *)
     exit 0

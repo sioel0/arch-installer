@@ -57,3 +57,6 @@ enable = true
 max-wrap = 10
 wrap-indicator = ""
 wrap-at-text-width = true
+
+[keys.insert.j]
+k = "normal_mode"

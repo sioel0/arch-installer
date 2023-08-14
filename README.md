@@ -11,12 +11,28 @@
 Arch Linux installation script that works with Ansible.
 
 ## How to use
-To use the script run it with:
+This installation script works in two different phases:
+- OS installation phase
+- Post-installation phase
+
+### OS installation phase
+To use the OS installation phase just run this command:
 ```
+git clone https://github.com/sioel0/arch-installer
+cd arch-installer
+./iso_install.sh [--pc <pc_model>]
+```
+If the `--pc` option is omitted any disk layout file will be used and you will
+have to configure it yourself. This can be useful when you're using a new
+pc/laptop.
+
+### Post-installation phase
+After reboot you will find the arch-installer directory at 
+**/home/sioel0/Projects/arch-installer** you just have to run the following
+command:
+```
+cd /home/sioel0/Projects/arch-installer
 ansible-playbook install.yml --ask-become-pass --extra-vars "signing_gpg_key=<KEY>"
 ```
 
-To extract the key value use:
-```
-gpg --list-private-keys --format=long
-```
+**N.B.** To extract the key value use `gpg --list-private-keys --format=long`

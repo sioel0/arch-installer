@@ -2,7 +2,7 @@
   "height": 30,
   "position": "bottom",
   "spacing": 5,
-  "modules-left": ["wlr/workspaces"],
+  "modules-left": ["hyprland/workspaces"],
   "modules-center": ["clock", "tray"],
   "modules-right": ["idle_inhibitor", "network", "pulseaudio", "battery"],
   "wlr/workspaces": {

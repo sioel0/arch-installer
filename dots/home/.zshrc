@@ -29,10 +29,15 @@ export PAGER="bat"
 export PATH="$PATH:/home/sioel0/.local/bin:/home/sioel0/.scripts"
 export TERM="xterm-256color"
 export ANSIBLE_NOCOWS=1
+# pico variables
+export PICO_SDK_PATH=/home/sioel0/pico/pico-sdk
+export PICO_EXAMPLES_PATH=/home/sioel0/pico/pico-examples
+export PICO_EXTRAS_PATH=/home/sioel0/pico/pico-extras
+export PICO_PLAYGROUND_PATH=/home/sioel0/pico/pico-playground
 
 # aliases
 alias cat='bat'
-alias ls='lsd'
+#alias ls='lsd'
 alias ll='ls -l'
 alias la='ls -la'
 alias sctl='sudo systemctl'

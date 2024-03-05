@@ -54,7 +54,7 @@
           # wm
           - hyprland
           - swaylock
-          - swaybg
+          - hyprpaper
           - swayidle
           - xdg-desktop-portal-hyprland
           - polkit-kde-agent
@@ -63,7 +63,6 @@
           - mako
           - cliphist
           # system configuration
-          - light
           - pavucontrol
           - bumblebee
           # utilities
@@ -78,7 +77,6 @@
           - udisks2
           - slurp
           - grim
-          - ufw
           - ly
           # development
           - git
@@ -94,14 +92,12 @@
           - dnsmasq
           # vpn
           - tailscale
-          - openvpn
           # desktop apps
           - telegram-desktop
           - libreoffice
           - firefox
           - zathura
           - zathura-pdf-mupdf
-          - thunderbird
           - pcmanfm
           # terminal
           - foot

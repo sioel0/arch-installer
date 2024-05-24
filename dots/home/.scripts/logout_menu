@@ -1,6 +1,7 @@
 #!/bin/bash
 
 declare -a options=(
+"lockscreen"
 "logout"
 "reboot"
 "poweroff"
@@ -8,14 +9,17 @@ declare -a options=(
 CHOICE=$(printf '%s\n' "${options[@]}" | tofi -c /home/sioel0/.config/tofi/shutdown)
 
 case $CHOICE in
+  'lockscreen')
+    hyprlock
+  ;;
   'logout')
     hyprctl dispatch exit
   ;;
   'reboot')
-    reboot
+    systemctl reboot
   ;;
   'poweroff')
-    poweroff
+    systemctl poweroff
   ;;
   *)
     exit 0

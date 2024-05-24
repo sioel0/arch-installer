@@ -47,3 +47,4 @@
     cmd: |
       ufw default deny
       ufw enable
+  when: ctf|bool == false

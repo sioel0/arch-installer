@@ -58,6 +58,11 @@
       cd dots
       ./install.sh
 
+- name: Create polkit repo
+  file:
+    path: /etc/polkit1/rules.d
+    state: directory
+
 - name: Polkit rule for poweroff and reboot
   become: True
   copy:

@@ -10,6 +10,12 @@
     dest: /etc/modeprobe.d/nvidia.conf
     content: options nvidia_drm modeset=1
 
+- name: Create pacman hook repo
+  become: True
+  file:
+    path: /etc/pacman.d/hooks
+    state: directory
+
 - name: Create pacman hook
   copy:
     dest: /etc/pacman.d/hooks/nvidia.hook

@@ -1,0 +1,6 @@
+# yes to disable g14 repo setup(specific to rog notebooks)
+rog: yes
+
+git_name: sioel0
+git_email: leonisimone10@gmail.com
+git_editor: helix

@@ -1,6 +1,8 @@
 - name: Arch Linux Installation script, Arch + Hyprland
   connection: local
   hosts: localhost
+  vars_files:
+    - setup.yml
   tasks:
 
     - name: Remove archinstall logs
@@ -8,6 +10,27 @@
       ansible.builtin.file:
         path: /var/log/archinstall
         state: absent
+
+    # this part is specific to asus rog pc
+    - name: Add g14 repo keys
+      become: True
+      shell: |
+        pacman-key --recv-keys 8F654886F17D497FEFE3DB448B15A6B0E9A3FA35
+        pacman-key --finger 8F654886F17D497FEFE3DB448B15A6B0E9A3FA35
+        pacman-key --lsign-key 8F654886F17D497FEFE3DB448B15A6B0E9A3FA35
+        pacman-key --finger 8F654886F17D497FEFE3DB448B15A6B0E9A3FA35
+      when: rog|bool
+
+    - name: Update pacman.conf for g14 repoq
+      become: True
+      lineinfile:
+        path: /etc/pacman.conf
+        line: '{{ item.line }}'
+        state: present
+      loop:
+        - { line: '[g14]' }
+        - { line: 'Server = https://arch.asus-linux.org'}
+      when: rog|bool
 
     - name: Update pacman.conf settings
       become: True
@@ -42,7 +65,25 @@
         name: reflector.timer
         state: started
         enabled: yes
-  
+
+    - name: Pacman -Syu
+      become: True
+      pacman:
+        update_cache: yes
+        upgrade: yes
+
+    - name: Install rog specific packages
+      become: True
+      pacman:
+        name:
+          - asusctl
+          - power-profiles-daemon
+          - supergfxctl 
+          - switcheroo-control
+          - rog-control-center
+        state: present
+      when: rog|bool
+
     - name: Install packages
       become: True
       pacman:
@@ -53,9 +94,11 @@
           - neofetch
           # wm
           - hyprland
-          - swaylock
           - hyprpaper
-          - swayidle
+          - hypridle
+          - hyprlock
+          - hyprcursor
+          - waybar
           - xdg-desktop-portal-hyprland
           - polkit-kde-agent
           - qt5-wayland
@@ -64,7 +107,6 @@
           - cliphist
           # system configuration
           - pavucontrol
-          - bumblebee
           # utilities
           - htop
           - tmux
@@ -90,8 +132,6 @@
           - libvirt
           - edk2-ovmf
           - dnsmasq
-          # vpn
-          - tailscale
           # desktop apps
           - telegram-desktop
           - libreoffice
@@ -105,6 +145,11 @@
           - lsd
           # fonts
           - ttf-font-awesome
+          # networking
+          - nmap
+          - wireshark-cli
+          - wireshark-qt
+          - ufw
         state: present
 
     - name: Install rustup toolchain
@@ -136,11 +181,20 @@
         name: "{{ item }}"
       with_items:
         - ly
-        - bumblebeed
-        - tailscaled
         - libvirtd
         - docker
         - udisks2
+
+    - name: Enable rog specific services
+      become: True
+      systemd:
+        enabled: True
+        name: "{{ item }}"
+      with_items:
+        - power-profiles-daemon
+        - supergfxd
+        - switcheroo-control
+      when: rog|bool
 
     - name: Make zathura the default pdfviewer
       shell:
@@ -150,31 +204,19 @@
       git_config:
         name: core.editor
         scope: global
-        value: helix
+        value: "{{ git_editor }}"
     
     - name: Set git user.name
       git_config:
         name: user.name
         scope: global
-        value: sioel0
+        value: "{{ git_name }}"
 
     - name: Set git user.email
       git_config:
         name: user.email
         scope: global
-        value: sioel0@pm.me
-
-    - name: Sign commits by default
-      git_config:
-        name: commit.gpgsign
-        scope: global
-        value: true
-
-    - name: Setup gpg signing key for commits
-      git_config:
-        name: commit.signingkey
-        scope: global
-        value: "{{signing_gpg_key}}"
+        value: "{{ git_email }}"
 
     - name: Setup global gitignore
       git_config:
@@ -237,15 +279,6 @@
         - { line: '# Umask setup' }
         - { line: 'Defaults umask=0022' }
         - { line: 'Defaults umask_override' }
-
-    - name: Add the possibility to use light without sudo
-      become: True
-      lineinfile:
-        path: /etc/sudoers.d/00_sioel0
-        line: 'sioel0 ALL=(ALL) NOPASSWD: /usr/bin/light'
-        state: present
-        create: yes
-        validate: /usr/sbin/visudo -cf %s
 
     - name: Update access policies
       become: True

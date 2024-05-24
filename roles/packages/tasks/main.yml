@@ -1,0 +1,125 @@
+---
+# tasks file for packages
+- name: Update pacman.conf settings
+  become: True
+  lineinfile:
+    path: /etc/pacman.conf
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  loop:
+    - { regexp: '^#Color', line: 'Color' }
+    - { regexp: '^#VerbosePkgLists', line: 'VerbosePkgLists' }
+    - { regexp: '^#ParallelDownloads', line: 'ParallelDownloads = 10' }
+
+- name: Install reflector
+  become: True
+  pacman:
+    name: reflector
+    state: present
+
+- name: Update reflector settings
+  become: True
+  lineinfile:
+    path: /etc/xdg/reflector/reflector.conf
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  loop:
+    - { regexp: '^# --country France,Germany', line: '--country Italy,Germany, France' }
+    - { regexp: '^--latest', line: '--latest 50' }
+
+- name: Enable Reflector.timer
+  become: True
+  systemd:
+    name: reflector.timer
+    state: started
+    enabled: yes
+
+- name: Install packages
+  become: True
+  pacman:
+    name:
+      # aestethic
+      - lolcat
+      - figlet
+      - neofetch
+      # wm
+      - hyprland
+      - hyprpaper
+      - hypridle
+      - hyprlock
+      - hyprcursor
+      - waybar
+      - xdg-desktop-portal-hyprland
+      - polkit-kde-agent
+      - qt5-wayland
+      - qt6-wayland
+      - mako
+      - cliphist
+      # system configuration
+      - pavucontrol
+      # utilities
+      - htop
+      - tmux
+      - bat
+      - stow
+      - unzip
+      - nmap
+      - ripgrep
+      - xorg-xwayland
+      - udisks2
+      - slurp
+      - grim
+      - ly
+      # development
+      - git
+      - base-devel
+      - helix
+      - rustup
+      # virtualization
+      - docker
+      - virt-manager
+      - qemu-desktop
+      - libvirt
+      - edk2-ovmf
+      - dnsmasq
+      # desktop apps
+      - telegram-desktop
+      - libreoffice
+      - firefox
+      - zathura
+      - zathura-pdf-mupdf
+      - pcmanfm
+      # terminal
+      - foot
+      - zsh
+      - lsd
+      # fonts
+      - ttf-font-awesome
+      # networking
+      - nmap
+      - wireshark-cli
+      - wireshark-qt
+      - ufw
+    state: present
+
+- name: Install rustup toolchain
+  shell:
+    cmd: rustup toolchain install stable
+
+- name: Install paru
+  become: True
+  become_user: sioel0
+  args:
+    creates: /usr/bin/paru
+  shell: |
+    git clone https://aur.archlinux.org/paru.git
+    cd paru
+    yes | makepkg -si
+    cd -
+    rm -rf paru
+
+- name: Install aur packages via paru
+  become: True
+  become_user: sioel0
+  shell:
+    cmd: paru -S --noconfirm --noprogressbar --needed wob tofi-git spotify

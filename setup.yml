@@ -1,6 +1,13 @@
-# yes to disable g14 repo setup(specific to rog notebooks)
+# this file gives the possibility to customize the installation, you can select which roles you want to use
+git: yes
+
+hardening: yes
+
+housekeeping: yes
+
+nvidia: yes
+
+packages: yes
+
 rog: yes
 
-git_name: sioel0
-git_email: leonisimone10@gmail.com
-git_editor: helix

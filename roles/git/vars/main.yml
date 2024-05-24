@@ -1,0 +1,7 @@
+---
+# vars file for git
+git_name: NAME
+
+git_email: EMAIL
+
+git_editor: EDITOR

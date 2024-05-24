@@ -1,0 +1,49 @@
+---
+# tasks file for hardening
+- name: Change umask settings
+  become: True
+  lineinfile:
+    path: /etc/profile
+    regexp: '^umask 022'
+    line: 'umask 0077'
+
+- name: Update umask inside sudoers file
+  become: True
+  lineinfile:
+    path: /etc/sudoers
+    line: '{{ item.line }}'
+    create: yes
+    state: present
+  loop:
+    - { line: '# Umask setup' }
+    - { line: 'Defaults umask=0022' }
+    - { line: 'Defaults umask_override' }
+
+- name: Update access policies
+  become: True
+  lineinfile:
+    path: /etc/security/access.conf
+    line: '{{ item.line }}'
+    state: present
+  loop:
+    - { line: "+:{{ lookup('env', 'USER')}}:LOCAL" }
+    - { line: "-:ALL:ALL" }
+    - { line: "-:root:ALL" }
+
+- name: Update faillock setup
+  become: True
+  lineinfile:
+    path: /etc/security/faillock.conf
+    regexp: '{{ item.regexp }}'
+    line: '{{ item.line }}'
+  loop:
+    - { regexp: '^# dir', line: 'dir = /var/lib/faillock' }
+    - { regexp: '^# deny', line: 'deny = 5' }
+    - { regexp: '^# unlock_time', line: 'unlock_time = 300' }
+
+- name: Change ufw rules and enable it
+  become: True
+  shell:
+    cmd: |
+      ufw default deny
+      ufw enable

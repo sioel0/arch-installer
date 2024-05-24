@@ -1,2 +1,13 @@
 ---
 # tasks file for ctf
+- name: Install packages
+  become: True
+  pacman:
+    name:
+      - sagemath
+      - python-pip
+      - python
+      - pwndbg
+      - python-pwntools
+      - radare2
+      - ropper

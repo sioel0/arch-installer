@@ -16,7 +16,7 @@
     state: present
   loop:
     - { line: '[g14]' }
-    - { line: 'https://arch.asus-linux.org'}
+    - { line: 'Server = https://arch.asus-linux.org'}
 
 - name: Pacman -Syu
   become: True

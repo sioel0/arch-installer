@@ -1,13 +1,17 @@
 # this file gives the possibility to customize the installation, you can select which roles you want to use
+
+# install packages to play ctf, usefull to create pwning vm
+ctf: no
+# run git setup role
 git: yes
-
+# hardening options setup
 hardening: yes
-
+# general configuration
 housekeeping: yes
-
+# install and setup nvidia package
 nvidia: yes
-
+# general packages installation
 packages: yes
-
+# install rog specific packages
 rog: yes
 

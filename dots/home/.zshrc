@@ -7,10 +7,6 @@ fi
 
 # Setup zinit plugin manager
 export ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-export EDITOR="helix"
-export VISUAL="helix"
-export PAGER="bat"
-export PATH="$PATH:/home/sioel0/.local/bin:/home/sioel0/.scripts"
 
 if [ ! -d "$ZINIT_HOME" ]; then
   mkdir -p "$(dirname $ZINIT_HOME)"
@@ -29,9 +25,9 @@ zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 
 # Oh-my-zsh-plugins
-zinit snippet OMZP::git
 zinit snippet OMZP::sudo
 zinit snippet OMZP::command-not-found
+zinit snippet OMZP::tmux
 
 # Load completions
 autoload -U compinit && compinit
@@ -65,6 +61,21 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 zstyle ':completion:*:git-checkout:*' sort false
 zstyle ':fzf-tab:complete:*:*' fzf-preview 'bat ${(Q)realpath}'
+
+# Shell variables
+export EDITOR="helix"
+export VISUAL="helix"
+export PAGER="bat"
+export PATH="$PATH:/home/sioel0/.local/bin:/home/sioel0/.scripts"
+
+# Setup tmux plugin
+ZSH_TMUX_AUTOSTART=true
+ZSH_TMUX_AUTOSTART_ONCE=false
+ZSH_TMUX_AUTOQUIT=true
+ZSH_TMUX_CONFIG=/home/sioel0/.tmux.conf
+ZSH_TMUX_DEFAULT_SESSION_NAME="default"
+ZSH_TMUX_UNICODE=true
+ZSH_TMUX_FIXTERM_WITH_256COLOR=true
 
 # General aliases
 alias ls='eza --color=always'

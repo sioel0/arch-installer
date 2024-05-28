@@ -5,48 +5,84 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-export ZSH="$HOME/.oh-my-zsh"
-
-ZSH_THEME="powerlevel10k/powerlevel10k"
-
-HYPHEN_INSENSITIVE="true"
-
-zstyle ':omz:update' mode auto      # update automatically without asking
-
-zstyle ':omz:update' frequency 14
-
-ENABLE_CORRECTION="true"
-
-plugins=(git git-auto-fetch zsh-autosuggestions zsh-syntax-highlighting colored-man-pages colorize cp extract)
-
-source $ZSH/oh-my-zsh.sh
-
-# User configuration
-
+# Setup zinit plugin manager
+export ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 export EDITOR="helix"
 export VISUAL="helix"
 export PAGER="bat"
 export PATH="$PATH:/home/sioel0/.local/bin:/home/sioel0/.scripts"
-export TERM="xterm-256color"
-export ANSIBLE_NOCOWS=1
-# pico variables
-export PICO_SDK_PATH=/home/sioel0/pico/pico-sdk
-export PICO_EXAMPLES_PATH=/home/sioel0/pico/pico-examples
-export PICO_EXTRAS_PATH=/home/sioel0/pico/pico-extras
-export PICO_PLAYGROUND_PATH=/home/sioel0/pico/pico-playground
 
-# aliases
-alias cat='bat'
-#alias ls='lsd'
+if [ ! -d "$ZINIT_HOME" ]; then
+  mkdir -p "$(dirname $ZINIT_HOME)"
+  git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
+
+source "${ZINIT_HOME}"/zinit.zsh
+
+# Add Powerlevel10k
+zinit ice depth=1; zinit light romkatv/powerlevel10k
+
+# Plugins
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
+zinit light Aloxaf/fzf-tab
+
+# Oh-my-zsh-plugins
+zinit snippet OMZP::git
+zinit snippet OMZP::sudo
+zinit snippet OMZP::command-not-found
+
+# Load completions
+autoload -U compinit && compinit
+
+zinit cdreplay -q
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Keybindings
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
+
+# History settings
+HISTSIZE=5000
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
+
+# Completion styling
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+zstyle ':completion:*:git-checkout:*' sort false
+zstyle ':fzf-tab:complete:*:*' fzf-preview 'bat ${(Q)realpath}'
+
+# General aliases
+alias ls='eza --color=always'
+alias la='ls -al'
 alias ll='ls -l'
-alias la='ls -la'
-alias sctl='sudo systemctl'
-alias ssh='ssh -X'
-alias p='sudo pacman'
-alias v='nvim'
-alias sv='sudo nvim'
 alias hx='helix'
 alias shx='sudo helix'
+alias sctl='sudo systemctl'
+alias cat='bat'
 
-# load powerlevel10k configuration
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# Arch Linux aliases
+alias pin='sudo pacman -S'
+alias prm='sudo pacman -Rns'
+alias pcl='sudo pacman -Sc'
+alias pup='sudo pacman -Sy'
+alias sysupg='paru -Syu'
+alias aurins='paru -S'
+alias aurrm='paru -Rns'
+
+# Shell integrations
+eval "$(fzf --zsh)"

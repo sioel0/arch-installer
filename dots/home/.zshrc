@@ -95,5 +95,16 @@ alias sysupg='paru -Syu'
 alias aurins='paru -S'
 alias aurrm='paru -Rns'
 
+# Git aliases
+alias gc="git commit -m"
+alias ga="git add"
+alias gs="git status"
+alias gp="git push"
+alias gpl="git pull"
+alias gf="git fetch"
+alias grm="git remove"
+alias gco="git checkout"
+alias gb="git branch"
+
 # Shell integrations
 eval "$(fzf --zsh)"

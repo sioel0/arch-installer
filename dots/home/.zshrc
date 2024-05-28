@@ -24,6 +24,15 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 
+# Setup tmux plugin
+ZSH_TMUX_AUTOSTART=true
+ZSH_TMUX_AUTOSTART_ONCE=false
+ZSH_TMUX_AUTOQUIT=true
+ZSH_TMUX_CONFIG=/home/sioel0/.tmux.conf
+ZSH_TMUX_DEFAULT_SESSION_NAME="default"
+ZSH_TMUX_UNICODE=true
+ZSH_TMUX_FIXTERM_WITH_256COLOR=true
+
 # Oh-my-zsh-plugins
 zinit snippet OMZP::sudo
 zinit snippet OMZP::command-not-found
@@ -67,15 +76,6 @@ export EDITOR="helix"
 export VISUAL="helix"
 export PAGER="bat"
 export PATH="$PATH:/home/sioel0/.local/bin:/home/sioel0/.scripts"
-
-# Setup tmux plugin
-ZSH_TMUX_AUTOSTART=true
-ZSH_TMUX_AUTOSTART_ONCE=false
-ZSH_TMUX_AUTOQUIT=true
-ZSH_TMUX_CONFIG=/home/sioel0/.tmux.conf
-ZSH_TMUX_DEFAULT_SESSION_NAME="default"
-ZSH_TMUX_UNICODE=true
-ZSH_TMUX_FIXTERM_WITH_256COLOR=true
 
 # General aliases
 alias ls='eza --color=always'

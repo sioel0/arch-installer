@@ -4,29 +4,29 @@
     border: none;
     font-family: FontAwesome, JetBrains Mono NF;
     font-size: 12px;
-    color: @foreground;
+    color: @text;
 }
 
 window#waybar {
-  background: @background-darker;
-  color: @foreground;
+  background: @surface0;
+  color: @text;
 }
 
 #workspaces button {
     padding: 0 0px;
-    background: @background;
+    background: @surface0;
     color: white;
-    border-top: 2px solid @background;
+    border-top: 2px solid @surface1;
 }
 
 #workspaces button.focused {
     color: #e3c78a;
-    border-top: 2px solid @background;
+    border-top: 2px solid @surface1;
 }
 
 #mode {
     background: rgba(178, 178, 178, 0.5);
-    border-bottom: 3px solid @foreground;
+    border-bottom: 3px solid @text;
 }
 
 #clock, #battery, #cpu, #memory, #network, #pulseaudio, #custom-spotify, #tray, #mode {
@@ -50,13 +50,13 @@ window#waybar {
 
 @keyframes blink {
     to {
-        background-color: @background;
+        background-color: @surface0;
         color: @purple;
     }
 }
 
 #battery.warning:not(.charging) {
-    color: @foreground;
+    color: @text;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: linear;

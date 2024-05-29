@@ -44,6 +44,12 @@ export ZSH_TMUX_UNICODE="true"
 export ZSH_TMUX_TERM="tmux-256color"
 export ZSH_TMUX_FIXTERM_WITH_256COLOR=true
 
+# fzf color scheme
+export FZF_DEFAULT_OPTS=" \
+--color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 \
+--color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
+--color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796"
+
 # Oh-my-zsh-plugins
 zinit snippet OMZP::sudo
 zinit snippet OMZP::command-not-found
@@ -80,7 +86,7 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 zstyle ':completion:*:git-checkout:*' sort false
-zstyle ':fzf-tab:complete:*:*' fzf-preview 'bat ${(Q)realpath}'
+zstyle ':fzf-tab:complete:*:*' fzf-preview 'bat --color=always --style=numbers ${(Q)realpath}'
 
 # General aliases
 alias ls='eza --color=always'

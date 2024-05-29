@@ -1,10 +1,10 @@
 font = monospace
 font-size = 20
 
-background-color = #0b0e14dd
-text-color = #bfbdb6
-selection-color = #ffb454
-outline-color = #ffb454
+background-color = #24273a
+text-color = #cad3f5
+selection-color = #eed49f
+outline-color = #eed49f
 outline-width = 1
 border-width = 0
 prompt-text = ""

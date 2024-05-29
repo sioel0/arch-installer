@@ -5,6 +5,13 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# Shell variables
+export EDITOR="helix"
+export VISUAL="helix"
+export PAGER="bat"
+export PATH="$PATH:$HOME/.local/bin:$HOME/.scripts"
+export XDG_CONFIG_HOME="$HOME/.config"
+
 # Setup zinit plugin manager
 export ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
@@ -14,6 +21,9 @@ if [ ! -d "$ZINIT_HOME" ]; then
 fi
 
 source "${ZINIT_HOME}"/zinit.zsh
+
+# Remove zi alias to make zoxide work
+zinit ice atload'unalias zi'
 
 # Add Powerlevel10k
 zinit ice depth=1; zinit light romkatv/powerlevel10k
@@ -25,13 +35,14 @@ zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 
 # Setup tmux plugin
-ZSH_TMUX_AUTOSTART=true
-ZSH_TMUX_AUTOSTART_ONCE=false
-ZSH_TMUX_AUTOQUIT=true
-ZSH_TMUX_CONFIG=/home/sioel0/.tmux.conf
-ZSH_TMUX_DEFAULT_SESSION_NAME="default"
-ZSH_TMUX_UNICODE=true
-ZSH_TMUX_FIXTERM_WITH_256COLOR=true
+export ZSH_TMUX_AUTOSTART=true
+export ZSH_TMUX_AUTOSTART_ONCE=false
+export ZSH_TMUX_AUTOQUIT=true
+export ZSH_TMUX_CONFIG=$XDG_CONFIG_HOME/tmux/tmux.conf
+export ZSH_TMUX_DEFAULT_SESSION_NAME="default"
+export ZSH_TMUX_UNICODE="true"
+export ZSH_TMUX_TERM="tmux-256color"
+export ZSH_TMUX_FIXTERM_WITH_256COLOR=true
 
 # Oh-my-zsh-plugins
 zinit snippet OMZP::sudo
@@ -71,12 +82,6 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 zstyle ':completion:*:git-checkout:*' sort false
 zstyle ':fzf-tab:complete:*:*' fzf-preview 'bat ${(Q)realpath}'
 
-# Shell variables
-export EDITOR="helix"
-export VISUAL="helix"
-export PAGER="bat"
-export PATH="$PATH:/home/sioel0/.local/bin:/home/sioel0/.scripts"
-
 # General aliases
 alias ls='eza --color=always'
 alias la='ls -al'
@@ -108,3 +113,4 @@ alias gb="git branch"
 
 # Shell integrations
 eval "$(fzf --zsh)"
+eval "$(zoxide init zsh --cmd cd)"

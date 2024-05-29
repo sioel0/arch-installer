@@ -92,7 +92,8 @@
       # terminal
       - foot
       - zsh
-      - lsd
+      - eza
+      - zoxide
       # fonts
       - ttf-font-awesome
       # networking
